@@ -53,22 +53,3 @@ Notes:
 
     The application uses EclipseLink as the persistence provider, and
     is being developed using NetBeans 6.8 and 6.9 dev with GlassFish v3.
-
-    It is possible to run the application on GlassFish v2.1. To
-    do so, make the following changes:
-
-        1.  Open the persistence unit (Configuration Files >
-            persistence.xml). In the IDE's Design View, select
-            TopLink from the Persistence Provider drop-down.
-
-        2.  If you are using a blank password to connect to the
-            MySQL database, open the Server Resources >
-            sun-resources.xml file. In your connection pool
-            settings, set the value for the password to "()".
-
-            <property name="Password" value="()"/>
-
-        3.  Set the project to run on GlassFish 2.1. In the Projects
-            window, right-click the AffableBean node and choose
-            Properties. Select the Run category, then select
-            GlassFish 2.1 from the Server drop-down.

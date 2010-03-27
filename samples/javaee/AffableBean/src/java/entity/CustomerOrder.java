@@ -13,7 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +35,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "CustomerOrder.findAll", query = "SELECT c FROM CustomerOrder c"),
     @NamedQuery(name = "CustomerOrder.findById", query = "SELECT c FROM CustomerOrder c WHERE c.id = :id"),
     @NamedQuery(name = "CustomerOrder.findByAmount", query = "SELECT c FROM CustomerOrder c WHERE c.amount = :amount"),
-    @NamedQuery(name = "CustomerOrder.findByDateCreated", query = "SELECT c FROM CustomerOrder c WHERE c.dateCreated = :dateCreated")})
+    @NamedQuery(name = "CustomerOrder.findByDateCreated", query = "SELECT c FROM CustomerOrder c WHERE c.dateCreated = :dateCreated"),
+    @NamedQuery(name = "CustomerOrder.findByConfirmationNumber", query = "SELECT c FROM CustomerOrder c WHERE c.confirmationNumber = :confirmationNumber")})
 public class CustomerOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,12 +47,15 @@ public class CustomerOrder implements Serializable {
     @Basic(optional = false)
     @Column(name = "amount")
     private BigDecimal amount;
-    @Basic(optional = false,fetch=FetchType.EAGER)
+    @Basic(optional = false)
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+    @Basic(optional = false)
+    @Column(name = "confirmation_number")
+    private int confirmationNumber;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerOrder")
-    private Collection<OrderHasProduct> orderHasProductCollection;
+    private Collection<OrderedProduct> orderedProductCollection;
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Customer customerId;
@@ -64,10 +67,11 @@ public class CustomerOrder implements Serializable {
         this.id = id;
     }
 
-    public CustomerOrder(Integer id, BigDecimal amount, Date dateCreated) {
+    public CustomerOrder(Integer id, BigDecimal amount, Date dateCreated, int confirmationNumber) {
         this.id = id;
         this.amount = amount;
         this.dateCreated = dateCreated;
+        this.confirmationNumber = confirmationNumber;
     }
 
     public Integer getId() {
@@ -94,12 +98,20 @@ public class CustomerOrder implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Collection<OrderHasProduct> getOrderHasProductCollection() {
-        return orderHasProductCollection;
+    public int getConfirmationNumber() {
+        return confirmationNumber;
     }
 
-    public void setOrderHasProductCollection(Collection<OrderHasProduct> orderHasProductCollection) {
-        this.orderHasProductCollection = orderHasProductCollection;
+    public void setConfirmationNumber(int confirmationNumber) {
+        this.confirmationNumber = confirmationNumber;
+    }
+
+    public Collection<OrderedProduct> getOrderedProductCollection() {
+        return orderedProductCollection;
+    }
+
+    public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
+        this.orderedProductCollection = orderedProductCollection;
     }
 
     public Customer getCustomerId() {

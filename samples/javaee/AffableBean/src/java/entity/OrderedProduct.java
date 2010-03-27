@@ -21,16 +21,16 @@ import javax.persistence.Table;
  * @author troy
  */
 @Entity
-@Table(name = "order_has_product")
+@Table(name = "ordered_product")
 @NamedQueries({
-    @NamedQuery(name = "OrderHasProduct.findAll", query = "SELECT o FROM OrderHasProduct o"),
-    @NamedQuery(name = "OrderHasProduct.findByOrderId", query = "SELECT o FROM OrderHasProduct o WHERE o.orderHasProductPK.orderId = :orderId"),
-    @NamedQuery(name = "OrderHasProduct.findByProductId", query = "SELECT o FROM OrderHasProduct o WHERE o.orderHasProductPK.productId = :productId"),
-    @NamedQuery(name = "OrderHasProduct.findByQuantity", query = "SELECT o FROM OrderHasProduct o WHERE o.quantity = :quantity")})
-public class OrderHasProduct implements Serializable {
+    @NamedQuery(name = "OrderedProduct.findAll", query = "SELECT o FROM OrderedProduct o"),
+    @NamedQuery(name = "OrderedProduct.findByOrderId", query = "SELECT o FROM OrderedProduct o WHERE o.orderedProductPK.orderId = :orderId"),
+    @NamedQuery(name = "OrderedProduct.findByProductId", query = "SELECT o FROM OrderedProduct o WHERE o.orderedProductPK.productId = :productId"),
+    @NamedQuery(name = "OrderedProduct.findByQuantity", query = "SELECT o FROM OrderedProduct o WHERE o.quantity = :quantity")})
+public class OrderedProduct implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected OrderHasProductPK orderHasProductPK;
+    protected OrderedProductPK orderedProductPK;
     @Basic(optional = false)
     @Column(name = "quantity")
     private String quantity;
@@ -41,28 +41,28 @@ public class OrderHasProduct implements Serializable {
     @ManyToOne(optional = false)
     private Product product;
 
-    public OrderHasProduct() {
+    public OrderedProduct() {
     }
 
-    public OrderHasProduct(OrderHasProductPK orderHasProductPK) {
-        this.orderHasProductPK = orderHasProductPK;
+    public OrderedProduct(OrderedProductPK orderedProductPK) {
+        this.orderedProductPK = orderedProductPK;
     }
 
-    public OrderHasProduct(OrderHasProductPK orderHasProductPK, String quantity) {
-        this.orderHasProductPK = orderHasProductPK;
+    public OrderedProduct(OrderedProductPK orderedProductPK, String quantity) {
+        this.orderedProductPK = orderedProductPK;
         this.quantity = quantity;
     }
 
-    public OrderHasProduct(int orderId, int productId) {
-        this.orderHasProductPK = new OrderHasProductPK(orderId, productId);
+    public OrderedProduct(int orderId, int productId) {
+        this.orderedProductPK = new OrderedProductPK(orderId, productId);
     }
 
-    public OrderHasProductPK getOrderHasProductPK() {
-        return orderHasProductPK;
+    public OrderedProductPK getOrderedProductPK() {
+        return orderedProductPK;
     }
 
-    public void setOrderHasProductPK(OrderHasProductPK orderHasProductPK) {
-        this.orderHasProductPK = orderHasProductPK;
+    public void setOrderedProductPK(OrderedProductPK orderedProductPK) {
+        this.orderedProductPK = orderedProductPK;
     }
 
     public String getQuantity() {
@@ -92,18 +92,18 @@ public class OrderHasProduct implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (orderHasProductPK != null ? orderHasProductPK.hashCode() : 0);
+        hash += (orderedProductPK != null ? orderedProductPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OrderHasProduct)) {
+        if (!(object instanceof OrderedProduct)) {
             return false;
         }
-        OrderHasProduct other = (OrderHasProduct) object;
-        if ((this.orderHasProductPK == null && other.orderHasProductPK != null) || (this.orderHasProductPK != null && !this.orderHasProductPK.equals(other.orderHasProductPK))) {
+        OrderedProduct other = (OrderedProduct) object;
+        if ((this.orderedProductPK == null && other.orderedProductPK != null) || (this.orderedProductPK != null && !this.orderedProductPK.equals(other.orderedProductPK))) {
             return false;
         }
         return true;
@@ -111,7 +111,7 @@ public class OrderHasProduct implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.OrderHasProduct[orderHasProductPK=" + orderHasProductPK + "]";
+        return "entity.OrderedProduct[orderedProductPK=" + orderedProductPK + "]";
     }
 
 }

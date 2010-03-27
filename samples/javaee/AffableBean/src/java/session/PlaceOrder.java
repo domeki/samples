@@ -8,8 +8,8 @@ import cart.ShoppingCart;
 import cart.ShoppingCartItem;
 import entity.Customer;
 import entity.CustomerOrder;
-import entity.OrderHasProduct;
-import entity.OrderHasProductPK;
+import entity.OrderedProduct;
+import entity.OrderedProductPK;
 import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.Random;
@@ -71,9 +71,10 @@ public class PlaceOrder implements PlaceOrderLocal {
         order.setCustomerId(customer);
         order.setAmount(BigDecimal.valueOf(cart.getTotal()));
 
-//        Random random = new Random();
-//        int i = random.nextInt();
-//        order.setConfirmationNumber(i);
+        // create confirmation number
+        Random random = new Random();
+        int i = random.nextInt(999999999);
+        order.setConfirmationNumber(i);
 
         em.persist(order);
         return order;
@@ -85,19 +86,19 @@ public class PlaceOrder implements PlaceOrderLocal {
 
         Iterator it = cart.getItems().keySet().iterator();
 
-        // iterate through shopping cart and add items to OrderHasProduct
+        // iterate through shopping cart and add items to OrderedProduct
         while(it.hasNext()) {
 
             String s = (String)it.next();
             int productId = Integer.parseInt(s);
 
             // set up primary key object
-            OrderHasProductPK orderedItemPK = new OrderHasProductPK();
+            OrderedProductPK orderedItemPK = new OrderedProductPK();
             orderedItemPK.setOrderId(order.getId());
             orderedItemPK.setProductId(productId);
 
             // create ordered item using PK object
-            OrderHasProduct orderedItem = new OrderHasProduct(orderedItemPK);
+            OrderedProduct orderedItem = new OrderedProduct(orderedItemPK);
 
             // set quantity
             ShoppingCartItem item = (ShoppingCartItem) cart.getItems().get(String.valueOf(productId));

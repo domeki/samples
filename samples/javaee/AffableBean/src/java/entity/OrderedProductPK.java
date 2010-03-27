@@ -15,7 +15,7 @@ import javax.persistence.Embeddable;
  * @author troy
  */
 @Embeddable
-public class OrderHasProductPK implements Serializable {
+public class OrderedProductPK implements Serializable {
     @Basic(optional = false)
     @Column(name = "order_id")
     private int orderId;
@@ -23,10 +23,10 @@ public class OrderHasProductPK implements Serializable {
     @Column(name = "product_id")
     private int productId;
 
-    public OrderHasProductPK() {
+    public OrderedProductPK() {
     }
 
-    public OrderHasProductPK(int orderId, int productId) {
+    public OrderedProductPK(int orderId, int productId) {
         this.orderId = orderId;
         this.productId = productId;
     }
@@ -58,10 +58,10 @@ public class OrderHasProductPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OrderHasProductPK)) {
+        if (!(object instanceof OrderedProductPK)) {
             return false;
         }
-        OrderHasProductPK other = (OrderHasProductPK) object;
+        OrderedProductPK other = (OrderedProductPK) object;
         if (this.orderId != other.orderId) {
             return false;
         }
@@ -73,7 +73,7 @@ public class OrderHasProductPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.OrderHasProductPK[orderId=" + orderId + ", productId=" + productId + "]";
+        return "entity.OrderedProductPK[orderId=" + orderId + ", productId=" + productId + "]";
     }
 
 }

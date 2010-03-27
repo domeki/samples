@@ -7,7 +7,6 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,8 +33,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone"),
     @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address"),
     @NamedQuery(name = "Customer.findByCityRegion", query = "SELECT c FROM Customer c WHERE c.cityRegion = :cityRegion"),
-    @NamedQuery(name = "Customer.findByCcNumber", query = "SELECT c FROM Customer c WHERE c.ccNumber = :ccNumber"),
-    @NamedQuery(name = "Customer.findByDateCreated", query = "SELECT c FROM Customer c WHERE c.dateCreated = :dateCreated")})
+    @NamedQuery(name = "Customer.findByCcNumber", query = "SELECT c FROM Customer c WHERE c.ccNumber = :ccNumber")})
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,10 +59,6 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @Column(name = "cc_number")
     private String ccNumber;
-    @Basic(optional = false)
-    @Column(name = "date_created")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
     private Collection<CustomerOrder> customerOrderCollection;
 
@@ -77,7 +69,7 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public Customer(Integer id, String name, String email, String phone, String address, String cityRegion, String ccNumber, Date dateCreated) {
+    public Customer(Integer id, String name, String email, String phone, String address, String cityRegion, String ccNumber) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -85,7 +77,6 @@ public class Customer implements Serializable {
         this.address = address;
         this.cityRegion = cityRegion;
         this.ccNumber = ccNumber;
-        this.dateCreated = dateCreated;
     }
 
     public Integer getId() {
@@ -142,14 +133,6 @@ public class Customer implements Serializable {
 
     public void setCcNumber(String ccNumber) {
         this.ccNumber = ccNumber;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
     public Collection<CustomerOrder> getCustomerOrderCollection() {

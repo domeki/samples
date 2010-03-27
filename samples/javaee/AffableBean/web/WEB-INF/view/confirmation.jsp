@@ -12,7 +12,7 @@
     <p id="confirmationText" class="rounded">
         <strong>Your order has been successfully processed and will be delivered within 24 hours.</strong>
         <br><br>
-        Please keep a note of your confirmation number: <strong>3415673</strong>
+        Please keep a note of your confirmation number: <strong>${requestScope.order.confirmationNumber}</strong>
         <br>
         If you have a query concerning your order, feel free to <a href="#">contact us</a>.
         <br><br>

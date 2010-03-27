@@ -58,9 +58,11 @@
                 </td>
                 <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
                     <fmt:message key="${product.name}"/>
+                    <br>
+                    <span class="smallText">${product.description}</span>
                 </td>
                 <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
-                    &euro; <c:out value="${product.price}"/> / unit
+                    &euro; <c:out value="${product.price}"/>
                 </td>
                 <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
 

@@ -36,6 +36,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
     @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description"),
     @NamedQuery(name = "Product.findByLastUpdate", query = "SELECT p FROM Product p WHERE p.lastUpdate = :lastUpdate")})
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -50,15 +51,17 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "price")
     private BigDecimal price;
+    @Column(name = "description")
+    private String description;
     @Basic(optional = false)
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private Collection<OrderHasProduct> orderHasProductCollection;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Collection<OrderedProduct> orderedProductCollection;
 
     public Product() {
     }
@@ -98,6 +101,14 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Date getLastUpdate() {
         return lastUpdate;
     }
@@ -106,20 +117,20 @@ public class Product implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Collection<OrderHasProduct> getOrderHasProductCollection() {
-        return orderHasProductCollection;
-    }
-
-    public void setOrderHasProductCollection(Collection<OrderHasProduct> orderHasProductCollection) {
-        this.orderHasProductCollection = orderHasProductCollection;
-    }
-
     public Category getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Collection<OrderedProduct> getOrderedProductCollection() {
+        return orderedProductCollection;
+    }
+
+    public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
+        this.orderedProductCollection = orderedProductCollection;
     }
 
     @Override

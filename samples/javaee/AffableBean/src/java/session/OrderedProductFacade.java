@@ -5,7 +5,7 @@
 
 package session;
 
-import entity.Customer;
+import entity.OrderedProduct;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,35 +19,40 @@ import javax.persistence.criteria.Root;
  * @author troy
  */
 @Stateless
-public class CustomerFacade {
+public class OrderedProductFacade {
     @PersistenceContext(unitName = "AffableBeanPU")
     private EntityManager em;
 
-    public void create(Customer customer) {
-        em.persist(customer);
+    public void create(OrderedProduct orderedProduct) {
+        em.persist(orderedProduct);
     }
 
-    public void edit(Customer customer) {
-        em.merge(customer);
+    public void edit(OrderedProduct orderedProduct) {
+        em.merge(orderedProduct);
     }
 
-    public void remove(Customer customer) {
-        em.remove(em.merge(customer));
+    public void remove(OrderedProduct orderedProduct) {
+        em.remove(em.merge(orderedProduct));
     }
 
-    public Customer find(Object id) {
-        return em.find(Customer.class, id);
+    public OrderedProduct find(Object id) {
+        return em.find(OrderedProduct.class, id);
     }
 
-    public List<Customer> findAll() {
+    // manually created
+    public List<OrderedProduct> findByOrderId(Object id) {
+        return em.createNamedQuery("OrderedProduct.findByOrderId").setParameter("orderId", id).getResultList();
+    }
+
+    public List<OrderedProduct> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Customer.class));
+        cq.select(cq.from(OrderedProduct.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public List<Customer> findRange(int[] range) {
+    public List<OrderedProduct> findRange(int[] range) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Customer.class));
+        cq.select(cq.from(OrderedProduct.class));
         Query q = em.createQuery(cq);
         q.setMaxResults(range[1] - range[0]);
         q.setFirstResult(range[0]);
@@ -56,7 +61,7 @@ public class CustomerFacade {
 
     public int count() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Customer> rt = cq.from(Customer.class);
+        Root<OrderedProduct> rt = cq.from(OrderedProduct.class);
         cq.select(em.getCriteriaBuilder().count(rt));
         Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();

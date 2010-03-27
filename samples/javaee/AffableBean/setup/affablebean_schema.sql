@@ -18,8 +18,7 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`customer` (
   `phone` VARCHAR(45) NOT NULL ,
   `address` VARCHAR(45) NOT NULL ,
   `city_region` VARCHAR(2) NOT NULL ,
-  `cc_number` VARCHAR(16) NOT NULL ,
-  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `cc_number` VARCHAR(19) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
 COMMENT = 'maintains customer details';
@@ -47,6 +46,7 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`product` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `price` DECIMAL(5,2) NOT NULL ,
+  `description` TINYTEXT NULL ,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
   `category_id` TINYINT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
@@ -70,35 +70,36 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`order` (
   `amount` DECIMAL(6,2) NOT NULL ,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   `customer_id` INT UNSIGNED NOT NULL ,
+  `confirmation_number` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_order_customer` (`customer_id` ASC) ,
   CONSTRAINT `fk_order_customer`
     FOREIGN KEY (`customer_id` )
     REFERENCES `affablebean`.`customer` (`id` )
     ON DELETE NO ACTION
-    ON UPDATE CASCADE)
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = 'maintains customer order details';
 
 
 -- -----------------------------------------------------
--- Table `affablebean`.`order_has_product`
+-- Table `affablebean`.`ordered_product`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `affablebean`.`order_has_product` ;
+DROP TABLE IF EXISTS `affablebean`.`ordered_product` ;
 
-CREATE  TABLE IF NOT EXISTS `affablebean`.`order_has_product` (
+CREATE  TABLE IF NOT EXISTS `affablebean`.`ordered_product` (
   `order_id` INT UNSIGNED NOT NULL ,
   `product_id` INT UNSIGNED NOT NULL ,
   `quantity` VARCHAR(4) NOT NULL DEFAULT '1' ,
   PRIMARY KEY (`order_id`, `product_id`) ,
-  INDEX `fk_order_has_product_order` (`order_id` ASC) ,
-  INDEX `fk_order_has_product_product` (`product_id` ASC) ,
-  CONSTRAINT `fk_order_has_product_order`
+  INDEX `fk_ordered_product_order` (`order_id` ASC) ,
+  INDEX `fk_ordered_product_product` (`product_id` ASC) ,
+  CONSTRAINT `fk_ordered_product_order`
     FOREIGN KEY (`order_id` )
     REFERENCES `affablebean`.`order` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_has_product_product`
+  CONSTRAINT `fk_ordered_product_product`
     FOREIGN KEY (`product_id` )
     REFERENCES `affablebean`.`product` (`id` )
     ON DELETE NO ACTION

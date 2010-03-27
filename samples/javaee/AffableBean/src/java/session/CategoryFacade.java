@@ -11,6 +11,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -38,18 +40,26 @@ public class CategoryFacade {
     }
 
     public List<Category> findAll() {
-        return em.createQuery("select object(o) from Category as o").getResultList();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Category.class));
+        return em.createQuery(cq).getResultList();
     }
 
     public List<Category> findRange(int[] range) {
-        Query q = em.createQuery("select object(o) from Category as o");
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Category.class));
+        Query q = em.createQuery(cq);
         q.setMaxResults(range[1] - range[0]);
         q.setFirstResult(range[0]);
         return q.getResultList();
     }
 
     public int count() {
-        return ((Long) em.createQuery("select count(o) from Category as o").getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Category> rt = cq.from(Category.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
     }
 
 }

@@ -14,7 +14,7 @@ import session.PlaceOrderLocal;
 import entity.Category;
 import entity.Customer;
 import entity.CustomerOrder;
-import entity.OrderHasProduct;
+import entity.OrderedProduct;
 import entity.Product;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 import session.CustomerOrderFacade;
-import session.OrderHasProductFacade;
+import session.OrderedProductFacade;
 
 @WebServlet(name = "Controller",
 urlPatterns = {"/category", "/addToCart", "/viewCart", "/updateCart", "/checkout", "/purchase", "/chooseLanguage"},
@@ -40,7 +40,7 @@ public class ControllerServlet extends HttpServlet {
     @EJB
     private CustomerOrderFacade customerOrderFacade;
     @EJB
-    private OrderHasProductFacade orderHasProductFacade;
+    private OrderedProductFacade OrderedProductFacade;
     @EJB
     private PlaceOrderLocal placeOrder;
     private Category selectedCategory;
@@ -340,14 +340,14 @@ public class ControllerServlet extends HttpServlet {
                         // get order details
                         CustomerOrder order = customerOrderFacade.find(orderId);
 
-                        List<OrderHasProduct> orderedProducts = orderHasProductFacade.findByOrderId(orderId);
+                        List<OrderedProduct> orderedProducts = OrderedProductFacade.findByOrderId(orderId);
 
                         Iterator iter = orderedProducts.iterator();
                         List<Product> products = new ArrayList<Product>();
 
                         while (iter.hasNext()) {
-                            OrderHasProduct o = (OrderHasProduct) iter.next();
-                            Product p = (Product) productFacade.find(o.getOrderHasProductPK().getProductId());
+                            OrderedProduct o = (OrderedProduct) iter.next();
+                            Product p = (Product) productFacade.find(o.getOrderedProductPK().getProductId());
                             products.add(p);
                         }
 
