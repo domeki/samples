@@ -309,7 +309,7 @@ public class ControllerServlet extends HttpServlet {
                 }
                 if (ccNumber == null
                         || ccNumber.equals("")
-                        || ccNumber.length() > 20) {
+                        || ccNumber.length() > 19) {
                     errorMessage = true;
                     ccNumberError = true;
                     request.setAttribute("ccNumberError", ccNumberError);

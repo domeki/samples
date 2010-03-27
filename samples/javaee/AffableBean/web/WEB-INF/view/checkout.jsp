@@ -111,10 +111,10 @@
             </c:if>
             <tr>
                 <td><label for="name"><fmt:message key="customerName"/>:</label></td>
-                <td>
+                <td class="inputField">
                     <input type="text"
-                           size="30"
-                           maxlength="30"
+                           size="31"
+                           maxlength="45"
                            name="name"
                            class="required"
                            value="${param.name}">
@@ -122,10 +122,10 @@
             </tr>
             <tr>
                 <td><label for="email"><fmt:message key="email"/>:</label></td>
-                <td>
+                <td class="inputField">
                     <input type="text"
-                           size="30"
-                           maxlength="30"
+                           size="31"
+                           maxlength="45"
                            name="email"
                            class="email required"
                            value="${param.email}">
@@ -133,19 +133,20 @@
             </tr>
             <tr>
                 <td><label for="phone"><fmt:message key="phone"/>:</label></td>
-                <td>
+                <td class="inputField">
                     <input type="text"
-                           size="30"
-                           maxlength="30"
+                           size="31"
+                           maxlength="16"
                            name="phone"
                            value="${param.phone}">
                 </td>
             </tr>
             <tr>
                 <td><label for="address"><fmt:message key="address"/>:</label></td>
-                <td><input type="text"
-                           size="30"
-                           maxlength="30"
+                <td class="inputField">
+                    <input type="text"
+                           size="31"
+                           maxlength="45"
                            name="address"
                            value="${param.address}">
 
@@ -161,8 +162,9 @@
             </tr>
             <tr>
                 <td><label for="creditcard"><fmt:message key="creditCard"/>:</label></td>
-                <td><input type="text"
-                           size="30"
+                <td class="inputField">
+                    <input type="text"
+                           size="31"
                            maxlength="19"
                            name="creditcard"
                            class="creditcard"

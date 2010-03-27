@@ -84,14 +84,18 @@ li { margin: 10px 0 }
 }
 
 .horizontalMargin {
-    margin: 0 30px;
+    margin-left: 28px;
+    margin-right: 5px
 }
 
-#viewCart { text-align: right }
+#viewCart {
+    text-align: left;
+    width: 210px;
+}
 
 .headerWidget {
-    width: 195px;
-    margin: 20px 5px;
+    width: 194px;
+    margin: 20px 0;
     font-size: small;
     float: right;
     line-height: 25px;
@@ -227,7 +231,7 @@ a.categoryButton:hover { text-decoration: none }
 
 /* checkout page styles */
 #checkoutTable {
-    width: 356px;
+    width: 405px;
     padding: 10px;
     background-color: #f5eabe;
     float: left;
@@ -236,11 +240,12 @@ a.categoryButton:hover { text-decoration: none }
 #checkoutTable td {
     vertical-align: top;
     text-align: right;
-    width: 100px;
     margin: 5px;
 }
 
-#infoBox { padding: 10px 90px 0 400px }
+.inputField { width: 237px }
+
+#infoBox { padding: 10px 25px 0 460px }
 
 #priceBox {
     padding: 10px;
@@ -262,7 +267,6 @@ a.categoryButton:hover { text-decoration: none }
 
 
 /* confirmation page styles */
-
 #confirmationText {
     margin: 0 20px 20px;
     padding: 10px;
@@ -341,7 +345,6 @@ a.categoryButton:hover { text-decoration: none }
 /* general styles */
 #main {
     background: #f7f7e9;
-    /*padding-bottom: 10px;*/
 }
 
 #singleColumn {

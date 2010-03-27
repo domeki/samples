@@ -88,7 +88,7 @@
                       <c:when test='${empty sessionScope.language}'>
                         <c:choose>
                           <c:when test="${pageContext.request.locale.language ne 'cs'}">
-                            <strong>english</strong>
+                            english
                           </c:when>
                           <c:otherwise>
                             <c:url var="url" value="chooseLanguage">
@@ -100,7 +100,7 @@
 
                         <c:choose>
                           <c:when test="${pageContext.request.locale.language eq 'cs'}">
-                            <strong>česky</strong>
+                            česky
                           </c:when>
                           <c:otherwise>
                             <c:url var="url" value="chooseLanguage">
@@ -115,7 +115,7 @@
                       <c:otherwise>
                         <c:choose>
                           <c:when test="${sessionScope.language ne 'cs'}">
-                            <strong>english</strong>
+                            english
                           </c:when>
                           <c:otherwise>
                             <c:url var="url" value="chooseLanguage">
@@ -127,7 +127,7 @@
 
                         <c:choose>
                           <c:when test="${sessionScope.language eq 'cs'}">
-                            <strong>česky</strong>
+                            česky
                           </c:when>
                           <c:otherwise>
                             <c:url var="url" value="chooseLanguage">
@@ -143,7 +143,7 @@
 
                 <%-- checkout widget --%>
                   <div class="headerWidget">
-                    <c:if test="${!empty cart && cart.numberOfItems != 0}">
+                    <c:if test="${!empty cart && cart.numberOfItems != 0 && requestScope['javax.servlet.forward.servlet_path'] ne '/checkout'}">
                       <a href="<c:url value='checkout'/>" class="rounded bubble">
                         <fmt:message key="proceedCheckout"/>
                       </a>
@@ -152,10 +152,6 @@
 
                 <%-- view cart widget --%>
                   <div class="headerWidget" id="viewCart">
-
-                    <c:if test="${!empty cart && cart.numberOfItems != 0}">
-                      <a href="<c:url value='viewCart'/>" class="rounded bubble"><fmt:message key="cart" /></a>
-                    </c:if>
 
                     <img src="img/cart.gif" alt="shopping cart icon" id="cart">
 
@@ -181,6 +177,10 @@
                         </c:otherwise>
                       </c:choose>
                     </span>
+
+                    <c:if test="${!empty cart && cart.numberOfItems != 0}">
+                      <a href="<c:url value='viewCart'/>" class="rounded bubble"><fmt:message key="cart" /></a>
+                    </c:if>
                   </div>
                 </div>
 
