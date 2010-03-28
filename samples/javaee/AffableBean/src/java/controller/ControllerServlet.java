@@ -162,7 +162,7 @@ public class ControllerServlet extends HttpServlet {
 
             String userView = (String) session.getAttribute("view");
 
-            if ((userView != null) && (!userView.equals("/index"))) {
+            if ((userView != null) && (!userView.equals("/index")) && (!userView.equals("/confirmation"))) {
                 // return user from whence s/he came
                 userPath = userView;
             } else {
@@ -275,7 +275,7 @@ public class ControllerServlet extends HttpServlet {
                 String ccNumber = request.getParameter("creditcard");
 
                 // perform simple validation
-                boolean errorMessage = false;
+                boolean validationErrorFlag = false;
                 boolean nameError;
                 boolean emailError;
                 boolean phoneError;
@@ -286,49 +286,49 @@ public class ControllerServlet extends HttpServlet {
                 if (name == null
                         || name.equals("")
                         || name.length() > 45) {
-                    errorMessage = true;
+                    validationErrorFlag = true;
                     nameError = true;
                     request.setAttribute("nameError", nameError);
                 }
                 if (email == null
                         || email.equals("")
                         || !email.contains("@")) {
-                    errorMessage = true;
+                    validationErrorFlag = true;
                     emailError = true;
                     request.setAttribute("emailError", emailError);
                 }
                 if (phone == null
                         || phone.equals("")
                         || phone.length() < 9) {
-                    errorMessage = true;
+                    validationErrorFlag = true;
                     phoneError = true;
                     request.setAttribute("phoneError", phoneError);
                 }
                 if (address == null
                         || address.equals("")
                         || address.length() > 45) {
-                    errorMessage = true;
+                    validationErrorFlag = true;
                     addressError = true;
                     request.setAttribute("addressError", addressError);
                 }
                 if (cityRegion == null
                         || cityRegion.equals("")
                         || cityRegion.length() > 2) {
-                    errorMessage = true;
+                    validationErrorFlag = true;
                     cityRegionError = true;
                     request.setAttribute("cityRegionError", cityRegionError);
                 }
                 if (ccNumber == null
                         || ccNumber.equals("")
                         || ccNumber.length() > 19) {
-                    errorMessage = true;
+                    validationErrorFlag = true;
                     ccNumberError = true;
                     request.setAttribute("ccNumberError", ccNumberError);
                 }
 
                 // if validation error found, return user to checkout
-                if (errorMessage == true) {
-                    request.setAttribute("errorMessage", errorMessage);
+                if (validationErrorFlag == true) {
+                    request.setAttribute("validationErrorFlag", validationErrorFlag);
                     userPath = "/checkout";
 
                     // otherwise, save order to database

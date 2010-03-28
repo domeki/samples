@@ -5,7 +5,7 @@
  * compliance with  the terms of the License at:
  * http://developer.sun.com/berkeley_license.html
  */
- 
+
 
 /* Description: Style rules for the AffableBean application */
 
@@ -196,7 +196,7 @@ a.categoryButton:hover { text-decoration: none }
 
 #productTable {
     width: 600px;
-    
+
     /* styles to collaborate with rounded categoryLabel */
     position: relative;
     z-index: 1;
@@ -274,47 +274,61 @@ a.categoryButton:hover { text-decoration: none }
     float: left;
 }
 
-.summaryTable {
-    width: 90%;
-    text-align: left;
-}
-
-.summaryTable th {
-    padding: 5px 10px;
-}
-
-.summaryTable td {
-    padding: 5px 20px;
-    height: 1.5em;
-    font-size: small;
-    font-family: "Courier New", courier, monospace;
-}
-
 .summaryColumn {
     margin-top: 15px;
     width: 50%;
     float: left;
 }
 
+#orderSummaryTable { width: 100% }
+
+#deliveryAddressTable {
+    width: 70%;
+    margin-left: 15%;
+}
+
+#deliveryAddressTable td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.summaryTable { text-align: left }
+
+.summaryTable th { padding: 5px 10px }
+
 .summaryHeading {
-    padding: 0 10px;
-    font-size: small;
     font-weight: bold;
-    font-family: "Courier New", courier, monospace;
     background-color: #edf8f7;
 }
 
-#summaryBox {
-    float: left;
-    margin: 0 10px 5px;
-}
-
-#addressBox {
-    text-align: left;
+.summaryTable td {
+    padding: 5px 10px 5px 20px;
     font-size: small;
     font-family: "Courier New", courier, monospace;
-    height: 94px;
 }
+
+#quantityColumn {
+    text-align: center;
+    width: 62px;
+}
+
+#priceColumn { width: 90px }
+
+#deliverySurchargeCellLeft {
+    text-align: right;
+    padding: 0;
+}
+
+#deliverySurchargeCellRight { padding: 0 20px }
+
+#totalCellLeft {
+    text-align: right;
+    padding: 0;
+}
+
+#totalCellRight { padding: 0 20px }
+
+#dateProcessedRow { padding: 2px 0 10px 20px }
 
 
 /* footer styles */
@@ -356,9 +370,9 @@ a.categoryButton:hover { text-decoration: none }
 
 .reallySmallText { font-size: xx-small }
 
-.even { background-color: #edf8f7 }
+.lightBlue { background-color: #edf8f7 }
 
-.odd { background-color: #fff }
+.white { background-color: #fff }
 
 .bubble {
     font-weight: bold;

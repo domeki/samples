@@ -143,7 +143,38 @@
 
                 <%-- checkout widget --%>
                   <div class="headerWidget">
-                    <c:if test="${!empty cart && cart.numberOfItems != 0 && requestScope['javax.servlet.forward.servlet_path'] ne '/checkout'}">
+
+                       <%-- tests for the following:
+                            * if cart exists and is not empty
+                            * if the requested view is not checkout
+                            * if the checkout view is returned with order failure message flagged
+                            * if the checkout view is returned with server-side validation errors detected
+                       
+                            <c:if test="${!empty sessionScope.cart}">
+                                CART EXISTS AND IS NOT NULL
+                            </c:if>
+                                <BR>
+                            <c:if test="${sessionScope.cart.numberOfItems != 0}">
+                                NUMBER OF ITEMS IN CART IS NOT 0
+                            </c:if>
+                                <BR>
+                            <c:if test="${requestScope['javax.servlet.forward.servlet_path'] ne '/checkout'}">
+                                REQUEST IS NOT CHECKOUT
+                            </c:if>
+                                <BR>
+                            <c:if test="${requestScope.validationErrorFlag ne true}">
+                                VALIDATION ERROR IS NOT FLAGGED
+                            </c:if>
+                                <BR>
+                            <c:if test="${requestScope.orderFailureFlag ne true}">
+                                ORDER FAILURE ERROR IS NOT FLAGGED
+                            </c:if> --%>
+
+                    <c:if test="${!empty sessionScope.cart && sessionScope.cart.numberOfItems != 0 &&
+                                  requestScope['javax.servlet.forward.servlet_path'] ne '/checkout' &&
+                                  requestScope.validationErrorFlag ne true &&
+                                  requestScope.orderFailureFlag ne true}">
+
                       <a href="<c:url value='checkout'/>" class="rounded bubble">
                         <fmt:message key="proceedCheckout"/>
                       </a>

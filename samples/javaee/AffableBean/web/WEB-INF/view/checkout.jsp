@@ -81,10 +81,10 @@
 
     <form id="checkoutForm" action="purchase" method="post">
         <table id="checkoutTable" class="rounded">
-            <c:if test="${!empty requestScope.errorMessage}">
+            <c:if test="${!empty requestScope.validationErrorFlag}">
                 <tr>
                     <td colspan="2" style="text-align:left">
-                        <span class="errorMessage smallText"><fmt:message key="errorMessage"/>
+                        <span class="errorMessage smallText"><fmt:message key="validationErrorMessage"/>
 
                           <c:if test="${!empty requestScope.nameError}">
                             <br><span class="indent"><fmt:message key="nameError"/></span>

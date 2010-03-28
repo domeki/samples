@@ -48,24 +48,24 @@
     </p>
 
     <table id="productTable">
-        
+
         <c:forEach var="product" items="${categoryProducts}" varStatus="iter">
 
-            <tr>
-                <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
+            <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
+                <td>
                     <img src="<c:out value='${initParam.productImagePath}${product.name}.png'/>"
                         alt="image of <fmt:message key='${product.name}'/>">
                 </td>
-                <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
+
+                <td>
                     <fmt:message key="${product.name}"/>
                     <br>
-                    <span class="smallText">${product.description}</span>
+                    <span class="smallText"><fmt:message key='${product.name}Description'/></span>
                 </td>
-                <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
-                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
-                </td>
-                <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
 
+                <td><fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/></td>
+
+                <td>
                     <form action="<c:url value='addToCart'/>" method="post">
                         <input type="hidden"
                                name="productId"
@@ -74,7 +74,6 @@
                                name="submit"
                                value="<fmt:message key='addToCart'/>">
                     </form>
-
                 </td>
             </tr>
 

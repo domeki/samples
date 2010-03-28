@@ -83,23 +83,23 @@
 
                 <c:set var="product" value="${itemMap.value.item}"/>
 
-                <tr>
-                    <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
+                <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
+                    <td>
                         <img src="<c:out value="${initParam.productImagePath}${product.name}"/>.png"
                             alt="image of <fmt:message key="${product.name}"/>">
                     </td>
-                    <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
-                        <fmt:message key="${product.name}"/>
-                    </td>
-                    <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
+
+                    <td><fmt:message key="${product.name}"/></td>
+
+                    <td>
                         <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${itemMap.value.total}"/>
                         <br>
                         <span class="smallText">(
                             <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
-                            / unit )</span>
+                            / <fmt:message key="unit"/> )</span>
                     </td>
-                    <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
 
+                    <td>
                         <form action="<c:url value="updateCart"/>" method="post">
                             <input type="hidden"
                                    name="productId"
@@ -114,7 +114,6 @@
                                    name="submit"
                                    value="<fmt:message key="update"/>">
                         </form>
-
                     </td>
                 </tr>
 
