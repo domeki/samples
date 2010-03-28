@@ -67,7 +67,8 @@
 
     <c:if test="${!empty cart && cart.numberOfItems != 0}">
 
-        <h4 id="subtotal"><fmt:message key="subtotal"/>: &euro; <c:out value="${cart.subtotal}"/></h4>
+        <h4 id="subtotal"><fmt:message key="subtotal"/>:
+            <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.subtotal}"/></h4>
 
         <table id="cartTable">
 
@@ -91,9 +92,11 @@
                         <fmt:message key="${product.name}"/>
                     </td>
                     <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
-                        &euro; <c:out value="${itemMap.value.total}"/>
+                        <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${itemMap.value.total}"/>
                         <br>
-                        <span class="smallText">( &euro; <c:out value="${product.price}"/> / unit )</span>
+                        <span class="smallText">(
+                            <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
+                            / unit )</span>
                     </td>
                     <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
 

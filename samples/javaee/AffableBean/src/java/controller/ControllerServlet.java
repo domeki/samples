@@ -107,7 +107,7 @@ public class ControllerServlet extends HttpServlet {
                 }
             }
 
-            // if shopping cart page is requested
+            // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
 
             userPath = "/cart";
@@ -116,7 +116,18 @@ public class ControllerServlet extends HttpServlet {
 
             if ((clear != null) && clear.equals("true")) {
                 cart = (ShoppingCart) session.getAttribute("cart");
-                cart.clear();
+
+                // if cart doesn't exist (e.g., if session times out)
+                // send user to welcome page
+                if (cart == null) {
+                    try {
+                        request.getRequestDispatcher("/index.jsp").forward(request, response);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    cart.clear();
+                }
             }
 
             // if checkout page is requested

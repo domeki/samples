@@ -62,7 +62,7 @@
                     <span class="smallText">${product.description}</span>
                 </td>
                 <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
-                    &euro; <c:out value="${product.price}"/>
+                    <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
                 </td>
                 <td class="${((iter.index % 2) == 0) ? 'even' : 'odd'}">
 

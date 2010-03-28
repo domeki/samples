@@ -22,7 +22,7 @@ public class ShoppingCart {
     public ShoppingCart() {
         items = new HashMap<String, ShoppingCartItem>();
         numberOfItems = 0;
-        total = 0.00;
+        total = 0;
     }
 
     public synchronized void addItem(String productId, Product product) {
@@ -70,35 +70,10 @@ public class ShoppingCart {
         }
     }
 
-//    public synchronized void remove(String bookId) {
-//        if (items.containsKey(bookId)) {
-//            ShoppingCartItem scitem = (ShoppingCartItem) items.get(bookId);
-//            scitem.decrementQuantity();
-//
-//            if (scitem.getQuantity() <= 0) {
-//                items.remove(bookId);
-//            }
-//
-//            numberOfItems--;
-//        }
-//    }
-
     public synchronized HashMap<String, ShoppingCartItem> getItems() {
 
         return items;
     }
-
-//    public synchronized List<ShoppingCartItem> getItems() {
-//        List<ShoppingCartItem> results = new ArrayList<ShoppingCartItem>();
-//        results.addAll(this.items.values());
-//
-//        return results;
-//    }
-
-//    @Override
-//    protected void finalize() throws Throwable {
-//        items.clear();
-//    }
 
     public synchronized int getNumberOfItems() {
         numberOfItems = 0;
@@ -115,7 +90,7 @@ public class ShoppingCart {
     }
 
     public synchronized double getSubtotal() {
-        double amount = 0.00;
+        double amount = 0;
 
         Iterator it = items.keySet().iterator();
 
@@ -132,7 +107,7 @@ public class ShoppingCart {
 
     public synchronized void calculateTotal(String surcharge) {
         double s = Double.parseDouble(surcharge);
-        double amount = 0.00;
+        double amount = 0;
 
         amount = getSubtotal();
         amount = amount + s;
@@ -147,7 +122,7 @@ public class ShoppingCart {
     public synchronized void clear() {
         items.clear();
         numberOfItems = 0;
-        total = 0.00;
+        total = 0;
     }
 
     private double roundOff(double x) {

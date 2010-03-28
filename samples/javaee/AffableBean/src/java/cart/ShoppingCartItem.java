@@ -43,7 +43,7 @@ public class ShoppingCartItem {
     }
 
     public double getTotal() {
-        double amount = 0.00;
+        double amount = 0;
 
         Product productDetails = (Product) this.getItem();
 

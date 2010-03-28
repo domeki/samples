@@ -42,7 +42,8 @@
                         ${orderedProduct.quantity}
                     </td>
                     <td class="${((iter.index % 2) != 0) ? 'even' : 'odd'}">
-                        &euro; ${requestScope.products[iter.index].price * orderedProduct.quantity}
+                        <fmt:formatNumber type="currency" currencySymbol="&euro; "
+                                          value="${requestScope.products[iter.index].price * orderedProduct.quantity}"/>
                     </td>
                 </tr>
 
@@ -54,11 +55,17 @@
 
             <tr class="even">
                 <td colspan="2" style="text-align: right; padding: 0"><strong>delivery surcharge:</strong></td>
-                <td style="padding: 0 20px">&euro; ${initParam.deliverySurcharge}</td>
+                <td style="padding: 0 20px">
+                    <fmt:formatNumber type="currency"
+                                      currencySymbol="&euro; "
+                                      value="${initParam.deliverySurcharge}"/></td>
             </tr>
             <tr class="even">
                 <td colspan="2" style="text-align: right; padding: 0"><strong>total:</strong></td>
-                <td style="padding: 0 20px">&euro; ${requestScope.order.amount}</td>
+                <td style="padding: 0 20px">
+                    <fmt:formatNumber type="currency"
+                                      currencySymbol="&euro; "
+                                      value="${requestScope.order.amount}"/></td>
             </tr>
 
             <tr class="even">
@@ -67,7 +74,10 @@
 
             <tr class="even">
                 <td colspan="3" style="text-align: left; padding: 2px 0 10px 20px"><strong>date processed:</strong>
-                    <fmt:formatDate value="${requestScope.order.dateCreated}" type="both" dateStyle="short" timeStyle="short"/></td>
+                    <fmt:formatDate value="${requestScope.order.dateCreated}"
+                                    type="both"
+                                    dateStyle="short"
+                                    timeStyle="short"/></td>
             </tr>
         </table>
 
