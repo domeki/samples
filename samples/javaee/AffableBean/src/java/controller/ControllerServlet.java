@@ -43,6 +43,7 @@ public class ControllerServlet extends HttpServlet {
     private OrderedProductFacade OrderedProductFacade;
     @EJB
     private PlaceOrderLocal placeOrder;
+
     private Category selectedCategory;
     private List categoryProducts;
     private ShoppingCart cart;
@@ -54,9 +55,10 @@ public class ControllerServlet extends HttpServlet {
 
         super.init(servletConfig);
 
-        // initializes the servlet with configuration information
+        // initialize servlet with configuration information
         surcharge = servletConfig.getServletContext().getInitParameter("deliverySurcharge");
 
+        // store category list in servlet context
         getServletContext().setAttribute("categories", categoryFacade.findAll());
     }
 
@@ -162,7 +164,10 @@ public class ControllerServlet extends HttpServlet {
 
             String userView = (String) session.getAttribute("view");
 
-            if ((userView != null) && (!userView.equals("/index")) && (!userView.equals("/confirmation"))) {
+            if ((userView != null) &&
+                (!userView.equals("/index")) &&
+                (!userView.equals("/confirmation"))) {  // session is destroyed before sending confirmation
+                                                        // view, so not possible to change languages there
                 // return user from whence s/he came
                 userPath = userView;
             } else {
@@ -263,6 +268,9 @@ public class ControllerServlet extends HttpServlet {
             // if purchase action is called
         } else if (userPath.equals("/purchase")) {
 
+            // get language choice
+            String language = (String) session.getAttribute("language");
+
             cart = (ShoppingCart) session.getAttribute("cart");
 
             if (cart != null) {
@@ -347,6 +355,11 @@ public class ControllerServlet extends HttpServlet {
 
                         // end session
                         session.invalidate();
+
+                        if (language != null) {                         // if user has manually changed language
+                            session = request.getSession(true);         // at some point during session, create
+                            session.setAttribute("language", language); // new session and set language attribute
+                        }
 
                         // get order details
                         CustomerOrder order = customerOrderFacade.find(orderId);

@@ -11,7 +11,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- Set language based on user's choice --%>
-<c:if test="${param['language'] != null}">
+<c:if test="${!empty sessionScope.language}">
     <fmt:setLocale value="${sessionScope.language}" scope="session" />
 </c:if>
 
@@ -198,10 +198,15 @@
                         </c:otherwise>
                       </c:choose>
 
-                  <%-- If only one item in cart, output 'item', otherwise output 'items' --%>
+                  <%-- Handle singular/plural forms of 'item' --%>
                       <c:choose>
                         <c:when test="${cart.numberOfItems == 1}">
                           <fmt:message key="item" />
+                        </c:when>
+                        <c:when test="${cart.numberOfItems == 2 ||
+                                        cart.numberOfItems == 3 ||
+                                        cart.numberOfItems == 4}">
+                          <fmt:message key="items2-4" />
                         </c:when>
                         <c:otherwise>
                           <fmt:message key="items" />
