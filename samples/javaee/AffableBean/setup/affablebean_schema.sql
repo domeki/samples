@@ -56,7 +56,6 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`product` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `price` DECIMAL(5,2) NOT NULL ,
-  `description` TINYTEXT NULL ,
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
   `category_id` TINYINT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
@@ -71,11 +70,11 @@ COMMENT = 'contains product details';
 
 
 -- -----------------------------------------------------
--- Table `affablebean`.`order`
+-- Table `affablebean`.`customer_order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `affablebean`.`order` ;
+DROP TABLE IF EXISTS `affablebean`.`customer_order` ;
 
-CREATE  TABLE IF NOT EXISTS `affablebean`.`order` (
+CREATE  TABLE IF NOT EXISTS `affablebean`.`customer_order` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `amount` DECIMAL(6,2) NOT NULL ,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -106,7 +105,7 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`ordered_product` (
   INDEX `fk_ordered_product_product` (`product_id` ASC) ,
   CONSTRAINT `fk_ordered_product_order`
     FOREIGN KEY (`order_id` )
-    REFERENCES `affablebean`.`order` (`id` )
+    REFERENCES `affablebean`.`customer_order` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordered_product_product`
