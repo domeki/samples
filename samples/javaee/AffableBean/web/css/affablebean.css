@@ -1,9 +1,11 @@
 /*
- * Copyright 2009 Sun Microsystems, Inc.
- * All rights reserved.  You may not modify, use,
- * reproduce, or distribute this software except in
- * compliance with  the terms of the License at:
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
  * http://developer.sun.com/berkeley_license.html
+ *
+ * author: tgiunipero
  */
 
 
@@ -75,7 +77,6 @@ li { margin: 10px 0 }
     margin: 20px 0 0 70px;
     float: left;
     font-size: 50px;
-    color: #333;
 }
 
 #cart {
@@ -135,7 +136,8 @@ li { margin: 10px 0 }
 .categoryLabel {
     position: absolute;
     background-color: #fff;
-    opacity: 0.7;
+    opacity: 0.7;               /* modern browsers */
+    filter: alpha(opacity=70);  /* IE 5.5, IE6 & IE7 */
     height: 40px;
     width: 210px;
     margin: 2px;
@@ -258,12 +260,22 @@ a.categoryButton:hover { text-decoration: none }
     padding: 5px;
 }
 
-.priceColumn {
+.checkoutPriceColumn {
     width: 80px;
     font-weight: bold;
 }
 
 .total { border-top: 1px solid #444 }
+
+label { line-height: 30px }
+
+error { line-height: inherit !important }
+
+label.error {
+    font-size: smaller;
+    line-height: 20px;
+    font-style: italic;
+}
 
 
 /* confirmation page styles */
@@ -307,12 +319,15 @@ a.categoryButton:hover { text-decoration: none }
     font-family: "Courier New", courier, monospace;
 }
 
-#quantityColumn {
+.quantityColumn {
     text-align: center;
     width: 62px;
 }
 
-#priceColumn { width: 90px }
+.confirmationPriceColumn {
+    width: 90px;
+    font-weight: normal;
+}
 
 #deliverySurchargeCellLeft {
     text-align: right;

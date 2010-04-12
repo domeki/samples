@@ -1,4 +1,5 @@
 
+Troy Giunipero
 6 July 2009
 
 The AffableBean application requires access to a MySQL database.

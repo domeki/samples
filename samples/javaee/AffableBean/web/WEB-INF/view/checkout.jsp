@@ -1,9 +1,11 @@
 <%--
- * Copyright 2009 Sun Microsystems, Inc.
- * All rights reserved.  You may not modify, use,
- * reproduce, or distribute this software except in
- * compliance with  the terms of the License at:
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
  * http://developer.sun.com/berkeley_license.html
+
+ * author: tgiunipero
 --%>
 
 
@@ -32,12 +34,6 @@
     </c:if>
   </c:otherwise>
 </c:choose>
-
-<style type="text/css">
-    label { line-height: 30px; }
-    error { line-height: inherit !important }
-    label.error { font-size: smaller; line-height: 20px; font-style: italic; }
-</style>
 
 <script type="text/javascript">
 
@@ -115,6 +111,7 @@
                     <input type="text"
                            size="31"
                            maxlength="45"
+                           id="name"
                            name="name"
                            class="required"
                            value="${param.name}">
@@ -126,6 +123,7 @@
                     <input type="text"
                            size="31"
                            maxlength="45"
+                           id="email"
                            name="email"
                            class="email required"
                            value="${param.email}">
@@ -137,6 +135,7 @@
                     <input type="text"
                            size="31"
                            maxlength="16"
+                           id="phone"
                            name="phone"
                            value="${param.phone}">
                 </td>
@@ -147,6 +146,7 @@
                     <input type="text"
                            size="31"
                            maxlength="45"
+                           id="address"
                            name="address"
                            value="${param.address}">
 
@@ -166,6 +166,7 @@
                     <input type="text"
                            size="31"
                            maxlength="19"
+                           id="creditcard"
                            name="creditcard"
                            class="creditcard"
                            value="${param.creditcard}">
@@ -191,18 +192,17 @@
         <table id="priceBox" class="rounded">
             <tr>
                 <td><fmt:message key="subtotal"/>:</td>
-                <td class="priceColumn">
+                <td class="checkoutPriceColumn">
                     <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.subtotal}"/></td>
             </tr>
             <tr>
                 <td><fmt:message key="surcharge"/>:</td>
-                <td class="priceColumn">
+                <td class="checkoutPriceColumn">
                     <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${initParam.deliverySurcharge}"/></td>
             </tr>
-            <tr></tr>
             <tr>
                 <td class="total"><fmt:message key="total"/>:</td>
-                <td class="total priceColumn">
+                <td class="total checkoutPriceColumn">
                     <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cart.total}"/></td>
             </tr>
         </table>
