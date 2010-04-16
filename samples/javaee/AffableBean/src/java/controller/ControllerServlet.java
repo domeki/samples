@@ -11,7 +11,6 @@ package controller;
 import cart.ShoppingCart;
 import session.CategoryFacade;
 import session.ProductFacade;
-import session.PlaceOrderLocal;
 import entity.Category;
 import entity.Customer;
 import entity.CustomerOrder;
@@ -27,15 +26,18 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 import session.CustomerOrderFacade;
+import session.GetCategoryAndProductsBean;
 import session.OrderedProductFacade;
+import session.PlaceOrderBean;
 
 /**
  *
  * @author tgiunipero
  */
 @WebServlet(name = "Controller",
-urlPatterns = {"/category", "/addToCart", "/viewCart", "/updateCart", "/checkout", "/purchase", "/chooseLanguage"},
-loadOnStartup = 1)
+            urlPatterns = {"/category", "/addToCart", "/viewCart", "/updateCart", "/checkout", "/purchase", "/chooseLanguage"},
+            loadOnStartup = 1)
+
 public class ControllerServlet extends HttpServlet {
 
     @EJB
@@ -46,8 +48,11 @@ public class ControllerServlet extends HttpServlet {
     private CustomerOrderFacade customerOrderFacade;
     @EJB
     private OrderedProductFacade OrderedProductFacade;
+
     @EJB
-    private PlaceOrderLocal placeOrder;
+    private PlaceOrderBean placeOrderBean;
+    @EJB
+    private GetCategoryAndProductsBean getCategoryAndProductsBean;
 
     private Category selectedCategory;
     private List categoryProducts;
@@ -89,17 +94,7 @@ public class ControllerServlet extends HttpServlet {
 
             if (categoryId != null) {
 
-                // get selected category
-                selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
-
-                // place selected category in session scope
-                session.setAttribute("selectedCategory", selectedCategory);
-
-                // get all products for selected category
-                categoryProducts = productFacade.findForCategory(selectedCategory);
-
-                // place category products in session scope
-                session.setAttribute("categoryProducts", categoryProducts);
+                getCategoryAndProductsBean.getCategoryAndProducts(categoryId, session);
             } else {
 
                 // if neither category id nor previously selected category exist
@@ -124,8 +119,7 @@ public class ControllerServlet extends HttpServlet {
             if ((clear != null) && clear.equals("true")) {
                 cart = (ShoppingCart) session.getAttribute("cart");
 
-                // if cart doesn't exist (e.g., if session times out)
-                // send user to welcome page
+                // if cart doesn't exist (e.g., if session times out) send user to welcome page
                 if (cart == null) {
                     try {
                         request.getRequestDispatcher("/index.jsp").forward(request, response);
@@ -261,8 +255,9 @@ public class ControllerServlet extends HttpServlet {
                 }
             }
 
-            cart = (ShoppingCart) session.getAttribute("cart");
             userPath = "/cart";
+
+            cart = (ShoppingCart) session.getAttribute("cart");
 
             if (!productId.equals("") && !quantity.equals("")) {
 
@@ -348,7 +343,7 @@ public class ControllerServlet extends HttpServlet {
                 } else {
 
                     int orderId;
-                    orderId = placeOrder.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
+                    orderId = placeOrderBean.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
 
                     // if order processed successfully
                     // send user to confirmation page
