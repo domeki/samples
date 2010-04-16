@@ -28,7 +28,7 @@ import javax.servlet.http.*;
 import session.CustomerOrderFacade;
 import session.GetCategoryAndProductsBean;
 import session.OrderedProductFacade;
-import session.PlaceOrderBean;
+import session.PlaceOrderLocal;
 
 /**
  *
@@ -50,7 +50,7 @@ public class ControllerServlet extends HttpServlet {
     private OrderedProductFacade OrderedProductFacade;
 
     @EJB
-    private PlaceOrderBean placeOrderBean;
+    private PlaceOrderLocal placeOrderBean;
     @EJB
     private GetCategoryAndProductsBean getCategoryAndProductsBean;
 

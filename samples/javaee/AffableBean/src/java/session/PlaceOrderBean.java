@@ -33,7 +33,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class PlaceOrderBean {
+public class PlaceOrderBean implements PlaceOrderLocal {
 
     @PersistenceContext(unitName = "AffableBeanPU")
     private EntityManager em;
