@@ -61,7 +61,9 @@
         </session-timeout>
     </session-config>
 
-<!--<welcome-file-list>
+<!--
+    not required for Servlet 3.0 - index is default
+    <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>-->
 
@@ -73,6 +75,16 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>-->
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/*</url-pattern>
+            <url-pattern>/WEB-INF/jspf/error/*</url-pattern>
+            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+        </jsp-property-group>
+    </jsp-config>
 
     <error-page>
         <error-code>403</error-code>
@@ -89,16 +101,6 @@
         <location>/WEB-INF/jspf/error/500.jspf</location>
     </error-page>
 
-    <jsp-config>
-        <jsp-property-group>
-            <url-pattern>/index.jsp</url-pattern>
-            <url-pattern>/WEB-INF/view/*</url-pattern>
-            <url-pattern>/WEB-INF/jspf/error/*</url-pattern>
-            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
-            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
-        </jsp-property-group>
-    </jsp-config>
-
     <security-constraint>
         <display-name>Checkout</display-name>
         <web-resource-collection>
@@ -108,8 +110,7 @@
         </web-resource-collection>
         <user-data-constraint>
             <description/>
-            <transport-guarantee>NONE</transport-guarantee>
-            <!-- replace with CONFIDENTIAL and configure in GF -->
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
 
@@ -123,7 +124,7 @@
             <role-name>adminUser</role-name>
         </auth-constraint>
         <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
 

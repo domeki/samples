@@ -363,12 +363,20 @@ label.error {
 
 
 /* admin styles */
+#adminLogo {
+    float:left;
+    margin-left: 30px;
+    margin-top: -20px;
+}
+
 #loginBox {
     width: 300px;
-    margin: 0 auto 30px;
+    margin: 0 auto;
     border: solid 1px #f5eabe;
     background-color: #f5eabe;
 }
+
+.login { height: 530px }
 
 
 /* general styles */

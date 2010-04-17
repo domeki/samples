@@ -11,13 +11,12 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
-        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../css/affablebean.css">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
@@ -25,7 +24,7 @@
         <script src="../js/jquery.corners.js" type="text/javascript"></script>
 
         <script type="text/javascript">
-            $(document).ready( function(){
+            $(document).ready(function(){
                 $('.rounded').corners();
             });
         </script>
@@ -34,12 +33,12 @@
     </head>
 
     <body>
-        <div id="main">
+        <div id="main" class="login">
             <div id="header">
-                <div id="headerBar"></div>
+                <div id="widgetBar"></div>
 
-                <a href="<c:url value="../index.jsp"/>">
-                    <img src="../img/logo.png" alt="Affable Bean logo" style="float:left; margin-left: 30px; margin-top: -20px">
+                <a href="<c:url value='../index.jsp'/>">
+                    <img src="../img/logo.png" alt="Affable Bean logo" id="adminLogo">
                 </a>
 
                 <img src="../img/logoText.png" id="logoText" alt="the affable bean">
