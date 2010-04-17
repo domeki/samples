@@ -1,0 +1,408 @@
+/*
+ * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
+ *
+ * You may not modify, use, reproduce, or distribute this software
+ * except in compliance with the terms of the license at:
+ * http://developer.sun.com/berkeley_license.html
+ *
+ * author: tgiunipero
+ */
+
+
+/* Description: Style rules for the AffableBean application */
+
+
+/* html tags */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 850px;
+    position: relative;
+    text-align: center;    /* required for IE */
+    margin: 20px auto;
+    color: #444;
+}
+
+hr {
+    border: 0;
+    background-color: #333;
+    height: 1px;
+}
+
+table {
+    margin: 0 20px;
+    border-spacing: 0;
+    text-align: center;
+    border: solid 1px #f5eabe;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+a:hover { text-decoration: none }
+
+a:visited { color: inherit }
+
+img { border: none }
+
+input, select { margin: 5px }
+
+li { margin: 10px 0 }
+
+
+/* styles for elements contained in the header, i.e.,
+   shopping cart, language widget, and logo */
+#header {
+    background: url(../img/stalk.png) no-repeat 28px 28px;
+    width: 850px;
+    height: 250px;
+}
+
+#logo {
+    float:left;
+    margin-left: 30px;
+    margin-top: -20px;
+}
+
+#widgetBar {
+    float: right;
+    width: 850px;
+    height: 50px;
+}
+
+#logoText {
+    /* font styles apply to text within alt tags */
+    font-family: 'American Typewriter', Courier, monospace;
+    margin: 20px 0 0 70px;
+    float: left;
+    font-size: 50px;
+}
+
+#cart {
+    position: absolute;
+    margin: 5px 0 0 2px;
+}
+
+.horizontalMargin {
+    margin-left: 28px;
+    margin-right: 5px
+}
+
+#viewCart {
+    text-align: left;
+    width: 210px;
+}
+
+.headerWidget {
+    width: 194px;
+    margin: 20px 0;
+    font-size: small;
+    float: right;
+    line-height: 25px;
+}
+
+
+/* index page styles */
+#indexLeftColumn {
+    text-align: left;
+    height: 400px;
+    width: 350px;
+    float: left;
+}
+
+#indexRightColumn {
+    text-align: left;
+    float: left;
+    height: 400px;
+    width: 500px;
+}
+
+#welcomeText {
+    margin: 30px 5px 0 30px;
+    line-height: 1.4em;
+}
+
+.categoryBox {
+    height: 176px;
+    width: 212px;
+    margin: 21px 14px 6px;
+    float: inherit;
+}
+
+/* Safari - disables underline for category boxes on index page */
+.categoryBox a:hover { text-decoration: none }
+
+.categoryLabel {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0.7;               /* modern browsers */
+    filter: alpha(opacity=70);  /* IE 5.5, IE6 & IE7 */
+    height: 40px;
+    width: 210px;
+    margin: 2px;
+}
+
+.categoryLabelText {
+    position: absolute;
+    line-height: 150%;
+    font-size: x-large;
+    margin: 3px 10px;
+}
+
+.categoryImage {
+    padding: 1px;
+    border:solid 1px #555;
+}
+
+
+/* category page styles */
+#categoryLeftColumn {
+    width: 185px;
+    float: left;
+    margin-top: 25px;
+    padding-left: 15px;
+}
+
+#categoryRightColumn {
+    margin-top: 10px;
+    width: 650px;
+    float: left;
+}
+
+#categoryTitle {
+    margin: -30px 180px 0 0;
+    font-size: x-large;
+    float: right;
+}
+
+.categoryText {
+    line-height: 25px;
+    font-size: x-large;
+}
+
+.categoryButton {
+    margin: 15px 22px;
+    padding: 13px;
+    display: block;
+    background-color: #d3ede8;
+}
+
+a.categoryButton:hover { text-decoration: none }
+
+#selectedCategory {
+    background-color: #b2d2d2;
+    margin-left: 10px;
+    width: 139px;
+}
+
+#productTable {
+    width: 600px;
+
+    /* styles to collaborate with rounded categoryLabel */
+    position: relative;
+    z-index: 1;
+}
+
+#productTable tr { height: 90px }
+
+#productTable td { width: 145px }
+
+
+/* shopping cart page styles */
+#actionBar {
+    margin: 30px;
+    width: 750px;
+    text-align: center;
+}
+
+#subtotal { margin: 40px 0 20px 430px }
+
+#cartTable { width: 750px }
+
+#cartTable td {
+    width: 145px;
+    height: 90px;
+}
+
+.header {
+    background-color: #c3e3e0;
+    height: 30px;
+}
+
+
+/* checkout page styles */
+#checkoutTable {
+    width: 405px;
+    padding: 10px;
+    background-color: #f5eabe;
+    float: left;
+}
+
+#checkoutTable td {
+    vertical-align: top;
+    text-align: right;
+    margin: 5px;
+}
+
+.inputField { width: 237px }
+
+#infoBox { padding: 10px 25px 0 460px }
+
+#priceBox {
+    padding: 10px;
+    border: 1px solid #c3e3e0;
+    background-color: #c3e3e0;
+}
+
+#priceBox td {
+    text-align: right;
+    padding: 5px;
+}
+
+.checkoutPriceColumn {
+    width: 80px;
+    font-weight: bold;
+}
+
+.total { border-top: 1px solid #444 }
+
+label { line-height: 30px }
+
+error { line-height: inherit !important }
+
+label.error {
+    font-size: smaller;
+    line-height: 20px;
+    font-style: italic;
+}
+
+
+/* confirmation page styles */
+#confirmationText {
+    margin: 0 20px 20px;
+    padding: 10px;
+    background-color: #f5eabe;
+    float: left;
+}
+
+.summaryColumn {
+    margin-top: 15px;
+    width: 50%;
+    float: left;
+}
+
+#orderSummaryTable { width: 100% }
+
+#deliveryAddressTable {
+    width: 70%;
+    margin-left: 15%;
+}
+
+#deliveryAddressTable td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.summaryTable { text-align: left }
+
+.summaryTable th { padding: 5px 10px }
+
+.summaryHeading {
+    font-weight: bold;
+    background-color: #edf8f7;
+}
+
+.summaryTable td {
+    padding: 5px 10px 5px 20px;
+    font-size: small;
+    font-family: "Courier New", courier, monospace;
+}
+
+.quantityColumn {
+    text-align: center;
+    width: 62px;
+}
+
+.confirmationPriceColumn {
+    width: 90px;
+    font-weight: normal;
+}
+
+#deliverySurchargeCellLeft {
+    text-align: right;
+    padding: 0;
+}
+
+#deliverySurchargeCellRight { padding: 0 20px }
+
+#totalCellLeft {
+    text-align: right;
+    padding: 0;
+}
+
+#totalCellRight { padding: 0 20px }
+
+#dateProcessedRow { padding: 2px 0 10px 20px }
+
+
+/* footer styles */
+#footer {
+    width: 350px;
+    height: 60px;
+    clear: left;
+    padding-top: 10px;
+}
+
+#footerText { margin-top: 5px }
+
+#footerDivider {
+    margin: 0 25px;
+    width: 300px;
+}
+
+
+/* admin styles */
+#loginBox {
+    width: 300px;
+    margin: 0 auto 30px;
+    border: solid 1px #f5eabe;
+    background-color: #f5eabe;
+}
+
+
+/* general styles */
+#main {
+    background: #f7f7e9;
+}
+
+#singleColumn {
+    margin: 20px 30px;
+    text-align: left;
+}
+
+.smallText { font-size: small }
+
+.reallySmallText { font-size: xx-small }
+
+.lightBlue { background-color: #edf8f7 }
+
+.white { background-color: #fff }
+
+.bubble {
+    font-weight: bold;
+    background-color: #f5eabe;
+    padding: 5px;
+    color: inherit;
+}
+
+.hMargin { margin: 0 30px }
+
+.error { color: #c00 }
+
+.errorMessage {
+    color: #c00;
+    font-style: italic;
+}
+
+.indent { margin-left: 6em }
