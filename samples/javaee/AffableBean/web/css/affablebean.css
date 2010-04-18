@@ -292,6 +292,18 @@ label.error {
     float: left;
 }
 
+.detailsTable {
+    text-align: left;
+}
+
+.detailsTable th { padding: 5px 10px }
+
+.detailsTable td {
+    padding: 5px 10px 5px 20px;
+    font-size: small;
+    font-family: "Courier New", courier, monospace;
+}
+
 #orderSummaryTable { width: 100% }
 
 #deliveryAddressTable {
@@ -302,21 +314,6 @@ label.error {
 #deliveryAddressTable td {
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-.summaryTable { text-align: left }
-
-.summaryTable th { padding: 5px 10px }
-
-.summaryHeading {
-    font-weight: bold;
-    background-color: #edf8f7;
-}
-
-.summaryTable td {
-    padding: 5px 10px 5px 20px;
-    font-size: small;
-    font-family: "Courier New", courier, monospace;
 }
 
 .quantityColumn {
@@ -346,22 +343,6 @@ label.error {
 #dateProcessedRow { padding: 2px 0 10px 20px }
 
 
-/* footer styles */
-#footer {
-    width: 350px;
-    height: 60px;
-    clear: left;
-    padding-top: 10px;
-}
-
-#footerText { margin-top: 5px }
-
-#footerDivider {
-    margin: 0 25px;
-    width: 300px;
-}
-
-
 /* admin styles */
 #adminLogo {
     float:left;
@@ -376,7 +357,33 @@ label.error {
     background-color: #f5eabe;
 }
 
-.login { height: 530px }
+#adminMenu {
+    float: left;
+    width: 180px;
+    margin: 25px 5px 0 30px;
+    border: solid 1px #f5eabe;
+    background-color: #f5eabe;
+}
+
+#adminTable {
+    width: 580px;
+    float: left;
+}
+
+
+/* footer styles */
+#footer {
+    width: 350px;
+    height: 60px;
+    clear: left;
+}
+
+#footerText { margin-top: 5px }
+
+#footerDivider {
+    margin: 0 25px;
+    width: 300px;
+}
 
 
 /* general styles */
@@ -414,3 +421,10 @@ label.error {
 }
 
 .indent { margin-left: 6em }
+
+.alignLeft { text-align: left }
+
+.tableHeading {
+    font-weight: bold;
+    background-color: #edf8f7;
+}

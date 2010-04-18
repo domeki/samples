@@ -28,8 +28,14 @@ import validate.FormValidator;
  * @author tgiunipero
  */
 @WebServlet(name = "Controller",
-            urlPatterns = {"/category", "/addToCart", "/viewCart", "/updateCart", "/checkout", "/purchase", "/chooseLanguage"},
-            loadOnStartup = 1)
+            loadOnStartup = 1,
+            urlPatterns = {"/category",
+                           "/addToCart",
+                           "/viewCart",
+                           "/updateCart",
+                           "/checkout",
+                           "/purchase",
+                           "/chooseLanguage"})
 
 public class ControllerServlet extends HttpServlet {
 
@@ -311,13 +317,7 @@ public class ControllerServlet extends HttpServlet {
                         }
 
                         // get order details
-                        try {
-                            orderManager.getOrderDetails(orderId, request);
-                        } catch (Exception ex) {
-                            System.out.println("Unable to get order details: " + ex.getMessage());
-                            ex.printStackTrace();
-                            response.sendError(response.SC_INTERNAL_SERVER_ERROR);  // HTTP status code 500
-                        }
+                        orderManager.getOrderDetails(orderId, request);
 
                         // otherwise, send back to checkout page and display error
                     } else {

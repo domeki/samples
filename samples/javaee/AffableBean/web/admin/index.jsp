@@ -10,6 +10,7 @@
 
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +34,7 @@
     </head>
 
     <body>
-        <div id="main" class="login">
+        <div id="main">
             <div id="header">
                 <div id="widgetBar"></div>
 
@@ -46,11 +47,76 @@
 
             <h2>admin console</h2>
 
-            <div id="loginBox" class="rounded">
+            <div id="adminMenu" class="rounded alignLeft">
+                <p style="margin-left: 15px"><a href="viewOrders">view all orders</a></p>
 
-                <p>[ TODO ]</p>
-
+                <p style="margin-left: 15px"><a href="viewCustomers">view all customers</a></p>
             </div>
+
+            <c:if test="${!empty requestScope.orderList}">
+
+                <table id="adminTable" class="detailsTable">
+
+                    <tr class="header">
+                        <th colspan="4">customer orders</th>
+                    </tr>
+
+                    <tr>
+                        <td class="tableHeading">order id</td>
+                        <td class="tableHeading">confirmation number</td>
+                        <td class="tableHeading">amount</td>
+                        <td class="tableHeading">date created</td>
+                    </tr>
+
+                    <c:forEach var="order" items="${requestScope.orderList}" varStatus="iter">
+
+                        <tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'}">
+
+                            <td>${order.id}</td>
+                            <td>${order.confirmationNumber}</td>
+                            <td>${order.amount}</td>
+                            <td><fmt:formatDate value="${order.dateCreated}"
+                                type="both" dateStyle="short" timeStyle="short"/></td>
+                        </tr>
+
+                    </c:forEach>
+
+                </table>
+
+            </c:if>
+
+            <c:if test="${!empty requestScope.customerList}">
+
+                <table id="adminTable" class="detailsTable">
+
+                    <tr class="header">
+                        <th colspan="7">customers</th>
+                    </tr>
+
+                    <tr>
+                        <td class="tableHeading">customer id</td>
+                        <td class="tableHeading">name</td>
+                        <td class="tableHeading">email</td>
+                        <td class="tableHeading">phone</td>
+                    </tr>
+
+                    <c:forEach var="customer" items="${requestScope.customerList}" varStatus="iter">
+
+                        <tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'}">
+
+                            <td>${customer.id}</td>
+                            <td>${customer.name}</td>
+                            <td>${customer.email}</td>
+                            <td>${customer.phone}</td>
+                        </tr>
+
+                    </c:forEach>
+
+                </table>
+
+            </c:if>
+
+            <div id="footer"></div>
         </div>
     </body>
 </html>

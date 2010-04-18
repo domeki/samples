@@ -28,15 +28,15 @@
 
     <div class="summaryColumn" >
 
-        <table id="orderSummaryTable" class="summaryTable">
+        <table id="orderSummaryTable" class="detailsTable">
             <tr class="header">
                 <th colspan="3"><fmt:message key="orderSummary"/></th>
             </tr>
 
             <tr>
-                <td class="summaryHeading"><fmt:message key="product"/></td>
-                <td class="summaryHeading"><fmt:message key="quantity"/></td>
-                <td class="summaryHeading"><fmt:message key="price"/></td>
+                <td class="tableHeading"><fmt:message key="product"/></td>
+                <td class="tableHeading"><fmt:message key="quantity"/></td>
+                <td class="tableHeading"><fmt:message key="price"/></td>
             </tr>
 
             <c:forEach var="orderedProduct" items="${requestScope.orderedProducts}" varStatus="iter">
@@ -89,7 +89,7 @@
 
     <div class="summaryColumn" >
 
-        <table id="deliveryAddressTable" class="summaryTable">
+        <table id="deliveryAddressTable" class="detailsTable">
             <tr class="header">
                 <th colspan="3"><fmt:message key="deliveryAddress"/></th>
             </tr>

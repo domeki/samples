@@ -57,6 +57,8 @@
                     <p><input type="submit" value="submit"></p>
                 </div>
             </form>
+
+            <div id="footer"></div>
         </div>
     </body>
 </html>

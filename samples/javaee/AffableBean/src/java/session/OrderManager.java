@@ -118,7 +118,7 @@ public class OrderManager {
         }
     }
 
-    public void getOrderDetails(int orderId, HttpServletRequest request) throws Exception {
+    public void getOrderDetails(int orderId, HttpServletRequest request) {
 
         CustomerOrder order = customerOrderFacade.find(orderId);
 
