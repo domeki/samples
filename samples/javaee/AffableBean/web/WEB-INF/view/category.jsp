@@ -71,7 +71,7 @@
                     <form action="<c:url value='addToCart'/>" method="post">
                         <input type="hidden"
                                name="productId"
-                               value="<c:out value='${product.id}'/>">
+                               value="${product.id}">
                         <input type="submit"
                                name="submit"
                                value="<fmt:message key='addToCart'/>">

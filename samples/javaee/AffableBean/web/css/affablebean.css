@@ -365,6 +365,8 @@ label.error {
     background-color: #f5eabe;
 }
 
+#adminMenu p { margin-left: 15px }
+
 #adminTable {
     width: 580px;
     float: left;
@@ -427,4 +429,9 @@ label.error {
 .tableHeading {
     font-weight: bold;
     background-color: #edf8f7;
+}
+
+.hover {
+    background-color: #c3e3e0;
+    cursor: pointer;
 }

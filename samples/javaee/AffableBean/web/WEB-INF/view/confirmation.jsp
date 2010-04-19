@@ -33,10 +33,10 @@
                 <th colspan="3"><fmt:message key="orderSummary"/></th>
             </tr>
 
-            <tr>
-                <td class="tableHeading"><fmt:message key="product"/></td>
-                <td class="tableHeading"><fmt:message key="quantity"/></td>
-                <td class="tableHeading"><fmt:message key="price"/></td>
+            <tr class="tableHeading">
+                <td><fmt:message key="product"/></td>
+                <td><fmt:message key="quantity"/></td>
+                <td><fmt:message key="price"/></td>
             </tr>
 
             <c:forEach var="orderedProduct" items="${requestScope.orderedProducts}" varStatus="iter">
@@ -100,7 +100,7 @@
                     <br>
                     ${requestScope.customer.address}
                     <br>
-                    Prague ${requestScope.customer.cityRegion}
+                    <fmt:message key="prague"/> ${requestScope.customer.cityRegion}
                     <br>
                     <hr>
                     <strong><fmt:message key="email"/>:</strong> ${requestScope.customer.email}

@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
 import session.AdminManager;
 
 /**
@@ -20,7 +21,8 @@ import session.AdminManager;
  * @author tgiunipero
  */
 @WebServlet(name = "AdminServlet",
-            urlPatterns = {"/admin/viewOrders",
+            urlPatterns = {"/admin/logout",
+                           "/admin/viewOrders",
                            "/admin/viewCustomers"})
 
 public class AdminServlet extends HttpServlet {
@@ -42,6 +44,7 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        HttpSession session = request.getSession(true);
         userPath = request.getServletPath();
 
         // if viewOrders is requested
@@ -56,9 +59,15 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("customerList", customerList);
         }
 
+        // if logout is requested
+        if (userPath.equals("/admin/logout")) {
+            session = request.getSession();
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+        }
+
         // use RequestDispatcher to forward request internally
         userPath = "/admin/index.jsp";
-
         try {
             request.getRequestDispatcher(userPath).forward(request, response);
         } catch (Exception ex) {
@@ -66,7 +75,6 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -93,12 +101,4 @@ public class AdminServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 }
