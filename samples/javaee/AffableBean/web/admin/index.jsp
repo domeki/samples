@@ -85,20 +85,11 @@
                         <tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
                             onclick="document.location.href='customerRecord?${customer.id}'">
 
-                          <script type="text/javascript">
-                            document.write('<td>${customer.id}</td>');
-                            document.write('<td>${customer.name}</td>');
-                            document.write('<td>${customer.email}</td>');
-                            document.write('<td>${customer.phone}</td>');
-                          </script>
-
-                          <%-- Below anchor tags are provided in the event that JavaScript is disabled --%>
-                          <noscript>
+                          <%-- Below anchor tags are provided in case JavaScript is disabled --%>
                             <td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.id}</a></td>
                             <td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.name}</a></td>
                             <td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.email}</a></td>
                             <td><a href="customerRecord?${customer.id}" class="noDecoration">${customer.phone}</a></td>
-                          </noscript>
                         </tr>
 
                     </c:forEach>
@@ -128,38 +119,19 @@
                         <tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
                             onclick="document.location.href='orderRecord?${order.id}'">
 
-                          <script type="text/javascript">
-                            document.write('<td>${order.id}</td>');
-                            document.write('<td>${order.confirmationNumber}</td>');
-                            document.write('<td><fmt:formatNumber type="currency"
-                                                                  currencySymbol="&euro; "
-                                                                  value="${order.amount}"/></td>');
-
-                            document.write('<td><fmt:formatDate value="${order.dateCreated}"
-                                                                type="both"
-                                                                dateStyle="short"
-                                                                timeStyle="short"/></td>');
-                          </script>
-
-                          <%-- Below anchor tags are provided in the event that JavaScript is disabled --%>
-                          <noscript>
+                          <%-- Below anchor tags are provided in case JavaScript is disabled --%>
                             <td><a href="orderRecord?${order.id}" class="noDecoration">${order.id}</a></td>
-
                             <td><a href="orderRecord?${order.id}" class="noDecoration">${order.confirmationNumber}</a></td>
-
                             <td><a href="orderRecord?${order.id}" class="noDecoration">
                                     <fmt:formatNumber type="currency"
-                                                      currencySymbol="&euro; "
-                                                      value="${order.amount}"/>
-                                </a></td>
+                                                  currencySymbol="&euro; "
+                                                  value="${order.amount}"/></a></td>
 
                             <td><a href="orderRecord?${order.id}" class="noDecoration">
                                     <fmt:formatDate value="${order.dateCreated}"
                                                 type="both"
                                                 dateStyle="short"
-                                                timeStyle="short"/>
-                                </a></td>
-                          </noscript>
+                                                timeStyle="short"/></a></td>
                         </tr>
 
                     </c:forEach>
@@ -209,17 +181,10 @@
 
                     <tr class="tableRow"
                         onclick="document.location.href='orderRecord?${order.id}'">
-
-                        <script type="text/javascript">
-                            document.write('<td colspan="2"><strong>view order summary &#x279f;</strong></td>')
-                        </script>
-
-                        <%-- Below anchor tag is provided in the event that JavaScript is disabled --%>
-                        <noscript>
-                            <td colspan="2">
-                                <a href="orderRecord?${order.id}" class="noDecoration">
-                                    <strong>view order summary &#x279f;</strong></a></td>
-                        </noscript>
+                        <td colspan="2">
+                            <%-- Anchor tag is provided in case JavaScript is disabled --%>
+                            <a href="orderRecord?${order.id}" class="noDecoration">
+                            <strong>view order summary &#x279f;</strong></a></td>
                     </tr>
                 </table>
 
@@ -303,17 +268,10 @@
 
                     <tr class="tableRow"
                         onclick="document.location.href='customerRecord?${customer.id}'">
-
-                        <script type="text/javascript">
-                            document.write('<td colspan="2"><strong>view customer details &#x279f;</strong></td>')
-                        </script>
-
-                        <%-- Below anchor tag is provided in the event that JavaScript is disabled --%>
-                        <noscript>
-                            <td colspan="2">
-                                <a href="customerRecord?${customer.id}" class="noDecoration">
-                                    <strong>view customer details &#x279f;</strong></a></td>
-                        </noscript>
+                        <td colspan="2">
+                            <%-- Anchor tag is provided in case JavaScript is disabled --%>
+                            <a href="customerRecord?${customer.id}" class="noDecoration">
+                                <strong>view customer details &#x279f;</strong></a></td>
                     </tr>
                 </table>
 
