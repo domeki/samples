@@ -42,11 +42,18 @@ public class CustomerOrderFacade {
 //        return em.find(CustomerOrder.class, id);
 //    }
 
-    // manually altered
+    // manually altered - refresh() required to retrieve order id from database
     public CustomerOrder find(Object id) {
         CustomerOrder order = em.find(CustomerOrder.class, id);
         em.refresh(order);
         return order;
+    }
+
+    // manually created
+    // in this implementation, there is only one order per customer
+    // the domain model however allows for multiple orders per customer
+    public CustomerOrder findByCustomerId(Object id) {
+        return (CustomerOrder) em.createNamedQuery("CustomerOrder.findByCustomerId").setParameter("customerId", id).getSingleResult();
     }
 
     public List<CustomerOrder> findAll() {

@@ -19,7 +19,7 @@
     <p id="confirmationText" class="rounded">
         <strong><fmt:message key="successMessage"/></strong>
         <br><br>
-        <fmt:message key="confirmationNumberMessage"/> <strong>${requestScope.order.confirmationNumber}</strong>
+        <fmt:message key="confirmationNumberMessage"/> <strong>${requestScope.orderRecord.confirmationNumber}</strong>
         <br>
         <fmt:message key="contactMessage"/>
         <br><br>
@@ -71,14 +71,14 @@
                 <td id="totalCellRight">
                     <fmt:formatNumber type="currency"
                                       currencySymbol="&euro; "
-                                      value="${requestScope.order.amount}"/></td>
+                                      value="${requestScope.orderRecord.amount}"/></td>
             </tr>
 
             <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>
 
             <tr class="lightBlue">
                 <td colspan="3" id="dateProcessedRow"><strong><fmt:message key="dateProcessed"/>:</strong>
-                    <fmt:formatDate value="${requestScope.order.dateCreated}"
+                    <fmt:formatDate value="${requestScope.orderRecord.dateCreated}"
                                     type="both"
                                     dateStyle="short"
                                     timeStyle="short"/></td>

@@ -7,14 +7,19 @@
  */
 package controller;
 
+import entity.Customer;
+import entity.CustomerOrder;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
-import session.AdminManager;
+import session.CustomerFacade;
+import session.CustomerOrderFacade;
+import session.OrderManager;
 
 /**
  *
@@ -23,15 +28,25 @@ import session.AdminManager;
 @WebServlet(name = "AdminServlet",
             urlPatterns = {"/admin/logout",
                            "/admin/viewOrders",
-                           "/admin/viewCustomers"})
+                           "/admin/viewCustomers",
+                           "/admin/customerRecord",
+                           "/admin/orderRecord"})
 
 public class AdminServlet extends HttpServlet {
 
     @EJB
-    private AdminManager adminManager;
+    private OrderManager orderManager;
+    @EJB
+    private CustomerFacade customerFacade;
+    @EJB
+    private CustomerOrderFacade customerOrderFacade;
+
     private String userPath;
-    private List orderList;
-    private List customerList;
+    private Customer customer;
+    private CustomerOrder order;
+    private List orderList = new ArrayList();
+    private List customerList = new ArrayList();
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,16 +62,40 @@ public class AdminServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         userPath = request.getServletPath();
 
+        // if viewCustomers is requested
+        if (userPath.equals("/admin/viewCustomers")) {
+            customerList = customerFacade.findAll();
+            request.setAttribute("customerList", customerList);
+        }
+
         // if viewOrders is requested
         if (userPath.equals("/admin/viewOrders")) {
-            orderList = adminManager.getOrders();
+            orderList = customerOrderFacade.findAll();
             request.setAttribute("orderList", orderList);
         }
 
-        // if viewCustomers is requested
-        if (userPath.equals("/admin/viewCustomers")) {
-            customerList = adminManager.getCustomers();
-            request.setAttribute("customerList", customerList);
+        // if customerRecord is requested
+        if (userPath.equals("/admin/customerRecord")) {
+
+            // get customer id from request
+            String customerId = request.getQueryString();
+
+            // get customer details
+            customer = customerFacade.find(Integer.parseInt(customerId));
+            request.setAttribute("customerRecord", customer);
+
+            // get customer order details
+            order = customerOrderFacade.findByCustomerId(customer);
+            request.setAttribute("order", order);
+        }
+
+        // if orderRecord is requested
+        if (userPath.equals("/admin/orderRecord")) {
+
+            // get customer id from request
+            String orderId = request.getQueryString();
+
+            orderManager.getOrderDetails(Integer.parseInt(orderId), request);
         }
 
         // if logout is requested

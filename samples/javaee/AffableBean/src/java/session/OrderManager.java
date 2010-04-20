@@ -137,7 +137,7 @@ public class OrderManager {
         Customer customer = order.getCustomerId();
 
         // place in request scope
-        request.setAttribute("order", order);
+        request.setAttribute("orderRecord", order);
         request.setAttribute("orderedProducts", orderedProducts);
         request.setAttribute("products", products);
         request.setAttribute("customer", customer);

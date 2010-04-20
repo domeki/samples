@@ -370,6 +370,7 @@ label.error {
 #adminTable {
     width: 580px;
     float: left;
+    background-color: #edf8f7;
 }
 
 
@@ -431,7 +432,16 @@ label.error {
     background-color: #edf8f7;
 }
 
-.hover {
+.selectedRow {
     background-color: #c3e3e0;
     cursor: pointer;
+}
+
+.noDecoration { text-decoration: none }
+
+.rigidWidth { width:200px }
+
+.embedded {
+    margin: 0;
+    border: none;
 }
