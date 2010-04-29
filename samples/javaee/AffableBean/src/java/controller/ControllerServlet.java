@@ -46,7 +46,6 @@ public class ControllerServlet extends HttpServlet {
     @EJB
     private OrderManager orderManager;
 
-    private Category selectedCategory;
     private List categoryProducts;
     private ShoppingCart cart;
     private String userPath;
@@ -77,6 +76,7 @@ public class ControllerServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         userPath = request.getServletPath();
+        Category selectedCategory = null;
 
         // if category page is requested
         if (userPath.equals("/category")) {

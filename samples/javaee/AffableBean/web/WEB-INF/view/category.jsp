@@ -19,7 +19,7 @@
 
 <div id="categoryLeftColumn">
 
-        <c:forEach var="category" items="${categories}">
+    <c:forEach var="category" items="${categories}">
 
         <c:choose>
             <c:when test="${category.name == selectedCategory.name}">

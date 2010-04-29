@@ -56,6 +56,10 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`product` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `price` DECIMAL(5,2) NOT NULL ,
+
+  -- Delete after description is moved to resource bundle
+  `description` TINYTEXT NULL ,
+
   `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
   `category_id` TINYINT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,

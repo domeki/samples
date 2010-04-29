@@ -19,10 +19,8 @@
 
 <div id="indexLeftColumn">
     <div id="welcomeText">
-        <p>
-            <span style="font-size: larger">
-                <fmt:message key='greeting' />
-            </span>
+        <p style="font-size: larger">
+            <fmt:message key='greeting' />
         </p>
 
         <p><fmt:message key='introText' /></p>
