@@ -17,7 +17,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     width: 850px;
     position: relative;
-    text-align: center;    /* required for IE */
+    text-align: center;
     margin: 20px auto;
     color: #444;
 }

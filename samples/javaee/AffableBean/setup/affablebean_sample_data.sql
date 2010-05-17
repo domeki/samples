@@ -7,7 +7,6 @@
 -- author: tgiunipero
 --
 
-
 --
 -- Database: `affablebean`
 --
@@ -26,7 +25,6 @@ INSERT INTO `category` (name) VALUES ('dairy'),('meats'),('bakery'),('fruitVeg')
 -- Sample data for table `product`
 --
 
-TRUNCATE `product`;
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('milk', 1.70, 1);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('cheese', 2.39, 1);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('butter', 1.09, 1);

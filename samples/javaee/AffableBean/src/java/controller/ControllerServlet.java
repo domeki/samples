@@ -21,7 +21,7 @@ import javax.servlet.http.*;
 import session.CategoryFacade;
 import session.OrderManager;
 import session.ProductFacade;
-import validate.FormValidator;
+import validate.Validator;
 
 /**
  *
@@ -49,6 +49,8 @@ public class ControllerServlet extends HttpServlet {
     private ShoppingCart cart;
     private String userPath;
     private String surcharge;
+    private Category selectedCategory;
+
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -75,7 +77,6 @@ public class ControllerServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         userPath = request.getServletPath();
-        Category selectedCategory = null;
         List<Product> categoryProducts;
 
         // if category page is requested
@@ -97,64 +98,35 @@ public class ControllerServlet extends HttpServlet {
 
                 // place category products in session scope
                 session.setAttribute("categoryProducts", categoryProducts);
-            } else {
-
-                // if neither category id nor previously selected category exist
-                // (e.g., if session has expired) send user to welcome page
-                if (selectedCategory == null) {
-
-                    try {
-                        request.getRequestDispatcher("/index.jsp").forward(request, response);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
             }
 
-            // if cart page is requested
-        } else if (userPath.equals("/viewCart")) {
 
-            userPath = "/cart";
+        // if cart page is requested
+        } else if (userPath.equals("/viewCart")) {
 
             String clear = request.getParameter("clear");
 
             if ((clear != null) && clear.equals("true")) {
-                cart = (ShoppingCart) session.getAttribute("cart");
 
-                // if cart doesn't exist (e.g., if session times out) send user to welcome page
-                if (cart == null) {
-                    try {
-                        request.getRequestDispatcher("/index.jsp").forward(request, response);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    cart.clear();
-                }
+                cart = (ShoppingCart) session.getAttribute("cart");
+                cart.clear();
             }
 
-            // if checkout page is requested
+            userPath = "/cart";
+
+
+        // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
 
             cart = (ShoppingCart) session.getAttribute("cart");
 
-            // if cart doesn't exist (i.e., if session has expired)
-            // send user to welcome page
-            if (cart == null) {
-                try {
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-
             // calculate total
             cart.calculateTotal(surcharge);
 
-            // forward to /WEB-INF/view/checkout.jsp
-            // switch to a secure channel
+            // forward to checkout page and switch to a secure channel
 
-            // if user switches language
+
+        // if user switches language
         } else if (userPath.equals("/chooseLanguage")) {
 
             // get language choice
@@ -169,20 +141,22 @@ public class ControllerServlet extends HttpServlet {
                 (!userView.equals("/index")) &&
                 (!userView.equals("/confirmation"))) {  // session is destroyed before sending confirmation
                                                         // view, so not possible to change languages there
-                                                        // return user from whence s/he came
                 userPath = userView;
             } else {
-                // if previous view is index or cannot be determined, send user to welcome page
+
+                // if previous view is index, confirmation, or cannot be determined, send user to welcome page
                 try {
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                return;
             }
         }
 
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
+
         try {
             request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception ex) {
@@ -202,72 +176,69 @@ public class ControllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");  // ensures that user input is interpreted as
+                                                // 8-bit Unicode (e.g., for Czech characters)
 
         HttpSession session = request.getSession(true);
+        Validator validator = new Validator();
+
         userPath = request.getServletPath();
-
-        // get user input from request
-        String productId = request.getParameter("productId");
-        String quantity = request.getParameter("quantity");
-
+        String productId;
         Product product;
+
 
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
 
+            // if user is adding item to cart for first time
+            // create cart object and attach it to user session
             if (cart == null) {
+
                 cart = new ShoppingCart();
                 session.setAttribute("cart", cart);
-            } else {
-                // if cart exists but isn't in user session, set for garbage collection
-                // and send user to welcome page (this can occur if session times out)
-                if (session.getAttribute("cart") == null) {
-                    cart = null;
-                    try {
-                        request.getRequestDispatcher("/index.jsp").forward(request, response);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
+
+            // if cart object exists but isn't in user session,
+            // empty existing cart object and place in session
+            } else if (session.getAttribute("cart") == null) {
+
+                cart.clear();
+                session.setAttribute("cart", cart);
+            }
+
+            // get user input from request
+            productId = request.getParameter("productId");
+
+            if (!productId.isEmpty()) {
+
+                product = productFacade.find(Integer.parseInt(productId));
+                cart.addItem(productId, product);
             }
 
             userPath = "/category";
 
-            if (!productId.equals("")) {
 
-                product = productFacade.find(Integer.parseInt(productId));
-
-                cart.addItem(productId, product);
-            }
-
-            // if updateCart action is called
+        // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
 
-            String userView = (String) session.getAttribute("view");
-
-            // if request does not come from cart page or if session expired
-            // send user to welcome page
-            if (userView == null || !userView.equals("/cart")) {
-
-                try {
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-            userPath = "/cart";
+            String quantity = request.getParameter("quantity");
 
             cart = (ShoppingCart) session.getAttribute("cart");
 
-            if (!productId.equals("") && !quantity.equals("")) {
+            // get user input from request
+            productId = request.getParameter("productId");
+
+            boolean invalidEntry = validator.validateQuantity(productId, quantity);
+
+            if (!invalidEntry) {
 
                 product = productFacade.find(Integer.parseInt(productId));
                 cart.update(productId, product, quantity);
             }
 
-            // if purchase action is called
+            userPath = "/cart";
+
+
+        // if purchase action is called
         } else if (userPath.equals("/purchase")) {
 
             // get language choice
@@ -276,6 +247,7 @@ public class ControllerServlet extends HttpServlet {
             cart = (ShoppingCart) session.getAttribute("cart");
 
             if (cart != null) {
+
                 // extract user data from request
                 String name = request.getParameter("name");
                 String email = request.getParameter("email");
@@ -284,10 +256,9 @@ public class ControllerServlet extends HttpServlet {
                 String cityRegion = request.getParameter("cityRegion");
                 String ccNumber = request.getParameter("creditcard");
 
-                // validate user data
+                // validateForm user data
                 boolean validationErrorFlag = false;
-                FormValidator formValidator = new FormValidator();
-                validationErrorFlag = formValidator.validate(name, email, phone, address, cityRegion, ccNumber, request);
+                validationErrorFlag = validator.validateForm(name, email, phone, address, cityRegion, ccNumber, request);
 
                 // if validation error found, return user to checkout
                 if (validationErrorFlag == true) {
@@ -300,9 +271,9 @@ public class ControllerServlet extends HttpServlet {
                     int orderId;
                     orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
 
-                    // if order processed successfully
-                    // send user to confirmation page
+                    // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
+
                         userPath = "/confirmation";
 
                         // dissociate shopping cart from session
@@ -311,27 +282,19 @@ public class ControllerServlet extends HttpServlet {
                         // end session
                         session.invalidate();
 
-                        if (language != null) {                         // if user has manually changed language
-                            session = request.getSession(true);         // at some point during session, create
-                            session.setAttribute("language", language); // new session and set language attribute
-                        }
+                        if (language != null) {                         // if user has manually changed language at some
+                            session = request.getSession(true);         // point during session, create new session and
+                            session.setAttribute("language", language); // set language attribute - otherwise language
+                        }                                               // may be switched on confirmation page!
 
                         // get order details
                         orderManager.getOrderDetails(orderId, request);
 
-                        // otherwise, send back to checkout page and display error
+                    // otherwise, send back to checkout page and display error
                     } else {
                         userPath = "/checkout";
                         request.setAttribute("orderFailureFlag", true);
                     }
-                }
-            } else {
-                // if cart doesn't exist or if session expired
-                // send user to welcome page
-                try {
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
             }
         }
@@ -345,4 +308,5 @@ public class ControllerServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
+
 }

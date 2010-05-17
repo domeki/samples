@@ -13,18 +13,45 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author tgiunipero
  */
-public class FormValidator {
+public class Validator {
 
-    // performs simple validation
-    public boolean validate(String name,
-                            String email,
-                            String phone,
-                            String address,
-                            String cityRegion,
-                            String ccNumber,
-                            HttpServletRequest request) {
+    // ensures that quantity input is number between 0 and 99
+    public boolean validateQuantity (String productId, String quantity) {
 
-        boolean validationErrorFlag = false;
+        boolean errorFlag = false;
+
+        if (!productId.isEmpty() && !quantity.isEmpty()) {
+
+            int i = -1;
+
+            try {
+
+                i = Integer.parseInt(quantity);
+            } catch (NumberFormatException nfe) {
+
+                System.out.println("User did not enter a number in the quantity field");
+            }
+
+            if (i < 0 || i > 99) {
+
+                errorFlag = true;
+            }
+        }
+
+        return errorFlag;
+    }
+
+
+    // performs simple validation on checkout form
+    public boolean validateForm(String name,
+                                String email,
+                                String phone,
+                                String address,
+                                String cityRegion,
+                                String ccNumber,
+                                HttpServletRequest request) {
+
+        boolean errorFlag = false;
         boolean nameError;
         boolean emailError;
         boolean phoneError;
@@ -35,46 +62,47 @@ public class FormValidator {
         if (name == null
                 || name.equals("")
                 || name.length() > 45) {
-            validationErrorFlag = true;
+            errorFlag = true;
             nameError = true;
             request.setAttribute("nameError", nameError);
         }
         if (email == null
                 || email.equals("")
                 || !email.contains("@")) {
-            validationErrorFlag = true;
+            errorFlag = true;
             emailError = true;
             request.setAttribute("emailError", emailError);
         }
         if (phone == null
                 || phone.equals("")
                 || phone.length() < 9) {
-            validationErrorFlag = true;
+            errorFlag = true;
             phoneError = true;
             request.setAttribute("phoneError", phoneError);
         }
         if (address == null
                 || address.equals("")
                 || address.length() > 45) {
-            validationErrorFlag = true;
+            errorFlag = true;
             addressError = true;
             request.setAttribute("addressError", addressError);
         }
         if (cityRegion == null
                 || cityRegion.equals("")
                 || cityRegion.length() > 2) {
-            validationErrorFlag = true;
+            errorFlag = true;
             cityRegionError = true;
             request.setAttribute("cityRegionError", cityRegionError);
         }
         if (ccNumber == null
                 || ccNumber.equals("")
                 || ccNumber.length() > 19) {
-            validationErrorFlag = true;
+            errorFlag = true;
             ccNumberError = true;
             request.setAttribute("ccNumberError", ccNumberError);
         }
 
-        return validationErrorFlag;
+        return errorFlag;
     }
+
 }
