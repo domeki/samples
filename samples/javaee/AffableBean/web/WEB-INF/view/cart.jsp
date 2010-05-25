@@ -14,8 +14,6 @@
      users view the same page when switching between EN and CS. --%>
 <c:set var="view" value="/cart" scope="session"/>
 
-<c:set var="cart" value="${sessionScope.cart}"/>
-
 
 <%-- HTML markup starts below --%>
 
@@ -48,7 +46,7 @@
         <c:set var="value">
             <c:choose>
                 <%-- if 'selectedCategory' session object exists, send user to previously viewed category --%>
-                <c:when test="${!empty sessionScope.selectedCategory}">
+                <c:when test="${!empty selectedCategory}">
                     category
                 </c:when>
                 <%-- otherwise send user to welcome page --%>
@@ -102,10 +100,10 @@
                     </td>
 
                     <td>
-                        <form action="<c:url value="updateCart"/>" method="post">
+                        <form action="<c:url value='updateCart'/>" method="post">
                             <input type="hidden"
                                    name="productId"
-                                   value="<c:out value="${product.id}"/>">
+                                   value="<c:out value='${product.id}'/>">
                             <input type="text"
                                    maxlength="2"
                                    size="2"
@@ -114,7 +112,7 @@
                                    style="margin:5px">
                             <input type="submit"
                                    name="submit"
-                                   value="<fmt:message key="update"/>">
+                                   value="<fmt:message key='update'/>">
                         </form>
                     </td>
                 </tr>

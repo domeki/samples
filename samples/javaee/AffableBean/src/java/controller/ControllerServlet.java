@@ -39,18 +39,16 @@ import validate.Validator;
 
 public class ControllerServlet extends HttpServlet {
 
+    private String userPath;
+    private String surcharge;
+    private ShoppingCart cart;
+
     @EJB
     private CategoryFacade categoryFacade;
     @EJB
     private ProductFacade productFacade;
     @EJB
     private OrderManager orderManager;
-
-    private ShoppingCart cart;
-    private String userPath;
-    private String surcharge;
-    private Category selectedCategory;
-
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -75,8 +73,9 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         userPath = request.getServletPath();
+        Category selectedCategory;
         List<Product> categoryProducts;
 
         // if category page is requested
@@ -179,7 +178,7 @@ public class ControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");  // ensures that user input is interpreted as
                                                 // 8-bit Unicode (e.g., for Czech characters)
 
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         Validator validator = new Validator();
 
         userPath = request.getServletPath();

@@ -18,7 +18,7 @@
 </div>
 
 <%-- customerList is requested --%>
-<c:if test="${!empty requestScope.customerList}">
+<c:if test="${!empty customerList}">
 
     <table id="adminTable" class="detailsTable">
 
@@ -33,7 +33,7 @@
             <td>phone</td>
         </tr>
 
-        <c:forEach var="customer" items="${requestScope.customerList}" varStatus="iter">
+        <c:forEach var="customer" items="${customerList}" varStatus="iter">
 
             <tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
                 onclick="document.location.href='customerRecord?${customer.id}'">
@@ -52,7 +52,7 @@
 </c:if>
 
 <%-- orderList is requested --%>
-<c:if test="${!empty requestScope.orderList}">
+<c:if test="${!empty orderList}">
 
     <table id="adminTable" class="detailsTable">
 
@@ -67,7 +67,7 @@
             <td>date created</td>
         </tr>
 
-        <c:forEach var="order" items="${requestScope.orderList}" varStatus="iter">
+        <c:forEach var="order" items="${orderList}" varStatus="iter">
 
             <tr class="${((iter.index % 2) == 1) ? 'lightBlue' : 'white'} tableRow"
                 onclick="document.location.href='orderRecord?${order.id}'">
@@ -94,7 +94,7 @@
 </c:if>
 
 <%-- customerRecord is requested --%>
-<c:if test="${!empty requestScope.customerRecord}">
+<c:if test="${!empty customerRecord}">
 
     <table id="adminTable" class="detailsTable">
 
@@ -103,31 +103,31 @@
         </tr>
         <tr>
             <td style="width: 290px"><strong>customer id:</strong></td>
-            <td>${requestScope.customerRecord.id}</td>
+            <td>${customerRecord.id}</td>
         </tr>
         <tr>
             <td><strong>name:</strong></td>
-            <td>${requestScope.customerRecord.name}</td>
+            <td>${customerRecord.name}</td>
         </tr>
         <tr>
             <td><strong>email:</strong></td>
-            <td>${requestScope.customerRecord.email}</td>
+            <td>${customerRecord.email}</td>
         </tr>
         <tr>
             <td><strong>phone:</strong></td>
-            <td>${requestScope.customerRecord.phone}</td>
+            <td>${customerRecord.phone}</td>
         </tr>
         <tr>
             <td><strong>address:</strong></td>
-            <td>${requestScope.customerRecord.address}</td>
+            <td>${customerRecord.address}</td>
         </tr>
         <tr>
             <td><strong>city region:</strong></td>
-            <td>${requestScope.customerRecord.cityRegion}</td>
+            <td>${customerRecord.cityRegion}</td>
         </tr>
         <tr>
             <td><strong>credit card number:</strong></td>
-            <td>${requestScope.customerRecord.ccNumber}</td>
+            <td>${customerRecord.ccNumber}</td>
         </tr>
 
         <tr><td colspan="2" style="padding: 0 20px"><hr></td></tr>
@@ -144,7 +144,7 @@
 </c:if>
 
 <%-- orderRecord is requested --%>
-<c:if test="${!empty requestScope.orderRecord}">
+<c:if test="${!empty orderRecord}">
 
     <table id="adminTable" class="detailsTable">
 
@@ -153,16 +153,16 @@
         </tr>
         <tr>
             <td><strong>order id:</strong></td>
-            <td>${requestScope.orderRecord.id}</td>
+            <td>${orderRecord.id}</td>
         </tr>
         <tr>
             <td><strong>confirmation number:</strong></td>
-            <td>${requestScope.orderRecord.confirmationNumber}</td>
+            <td>${orderRecord.confirmationNumber}</td>
         </tr>
         <tr>
             <td><strong>date processed:</strong></td>
             <td>
-                <fmt:formatDate value="${requestScope.orderRecord.dateCreated}"
+                <fmt:formatDate value="${orderRecord.dateCreated}"
                                 type="both"
                                 dateStyle="short"
                                 timeStyle="short"/></td>
@@ -179,18 +179,18 @@
 
                     <tr><td colspan="3" style="padding: 0 20px"><hr></td></tr>
 
-                    <c:forEach var="orderedProduct" items="${requestScope.orderedProducts}" varStatus="iter">
+                    <c:forEach var="orderedProduct" items="${orderedProducts}" varStatus="iter">
 
                         <tr>
                             <td>
-                                <fmt:message key="${requestScope.products[iter.index].name}"/>
+                                <fmt:message key="${products[iter.index].name}"/>
                             </td>
                             <td>
                                 ${orderedProduct.quantity}
                             </td>
                             <td class="confirmationPriceColumn">
                                 <fmt:formatNumber type="currency" currencySymbol="&euro; "
-                                                  value="${requestScope.products[iter.index].price * orderedProduct.quantity}"/>
+                                                  value="${products[iter.index].price * orderedProduct.quantity}"/>
                             </td>
                         </tr>
 
@@ -211,7 +211,7 @@
                         <td id="totalCellRight">
                             <fmt:formatNumber type="currency"
                                               currencySymbol="&euro; "
-                                              value="${requestScope.orderRecord.amount}"/></td>
+                                              value="${orderRecord.amount}"/></td>
                     </tr>
                 </table>
             </td>

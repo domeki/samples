@@ -19,7 +19,8 @@
     <p id="confirmationText" class="rounded">
         <strong><fmt:message key="successMessage"/></strong>
         <br><br>
-        <fmt:message key="confirmationNumberMessage"/> <strong>${requestScope.orderRecord.confirmationNumber}</strong>
+        <fmt:message key="confirmationNumberMessage"/>
+        <strong>${orderRecord.confirmationNumber}</strong>
         <br>
         <fmt:message key="contactMessage"/>
         <br><br>
@@ -39,18 +40,18 @@
                 <td><fmt:message key="price"/></td>
             </tr>
 
-            <c:forEach var="orderedProduct" items="${requestScope.orderedProducts}" varStatus="iter">
+            <c:forEach var="orderedProduct" items="${orderedProducts}" varStatus="iter">
 
                 <tr class="${((iter.index % 2) != 0) ? 'lightBlue' : 'white'}">
                     <td>
-                        <fmt:message key="${requestScope.products[iter.index].name}"/>
+                        <fmt:message key="${products[iter.index].name}"/>
                     </td>
                     <td class="quantityColumn">
                         ${orderedProduct.quantity}
                     </td>
                     <td class="confirmationPriceColumn">
                         <fmt:formatNumber type="currency" currencySymbol="&euro; "
-                                          value="${requestScope.products[iter.index].price * orderedProduct.quantity}"/>
+                                          value="${products[iter.index].price * orderedProduct.quantity}"/>
                     </td>
                 </tr>
 
@@ -71,14 +72,14 @@
                 <td id="totalCellRight">
                     <fmt:formatNumber type="currency"
                                       currencySymbol="&euro; "
-                                      value="${requestScope.orderRecord.amount}"/></td>
+                                      value="${orderRecord.amount}"/></td>
             </tr>
 
             <tr class="lightBlue"><td colspan="3" style="padding: 0 20px"><hr></td></tr>
 
             <tr class="lightBlue">
                 <td colspan="3" id="dateProcessedRow"><strong><fmt:message key="dateProcessed"/>:</strong>
-                    <fmt:formatDate value="${requestScope.orderRecord.dateCreated}"
+                    <fmt:formatDate value="${orderRecord.dateCreated}"
                                     type="both"
                                     dateStyle="short"
                                     timeStyle="short"/></td>
@@ -96,16 +97,16 @@
 
             <tr>
                 <td colspan="3" class="lightBlue">
-                    ${requestScope.customer.name}
+                    ${customer.name}
                     <br>
-                    ${requestScope.customer.address}
+                    ${customer.address}
                     <br>
-                    <fmt:message key="prague"/> ${requestScope.customer.cityRegion}
+                    <fmt:message key="prague"/> ${customer.cityRegion}
                     <br>
                     <hr>
-                    <strong><fmt:message key="email"/>:</strong> ${requestScope.customer.email}
+                    <strong><fmt:message key="email"/>:</strong> ${customer.email}
                     <br>
-                    <strong><fmt:message key="phone"/>:</strong> ${requestScope.customer.phone}
+                    <strong><fmt:message key="phone"/>:</strong> ${customer.phone}
                 </td>
             </tr>
         </table>

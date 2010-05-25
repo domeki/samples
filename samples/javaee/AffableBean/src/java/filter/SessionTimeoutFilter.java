@@ -24,14 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author tgiunipero
  */
-@WebFilter(filterName = "SessionTimeoutFilter",
-           urlPatterns = {"/category",
-                          "/addToCart",
-                          "/viewCart",
-                          "/updateCart",
-                          "/checkout",
-                          "/purchase",
-                          "/chooseLanguage"})
+@WebFilter(servletNames = {"Controller"})
 public class SessionTimeoutFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

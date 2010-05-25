@@ -14,8 +14,8 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%-- Set language based on user's choice --%>
-<c:if test="${!empty sessionScope.language}">
-    <fmt:setLocale value="${sessionScope.language}" scope="session" />
+<c:if test="${!empty language}">
+    <fmt:setLocale value="${language}" scope="session" />
 </c:if>
 
 
@@ -87,7 +87,7 @@
                     <c:choose>
                       <%-- When 'language' session attribute hasn't been set,
                            render language widget according to browser's preferred locale --%>
-                      <c:when test='${empty sessionScope.language}'>
+                      <c:when test='${empty language}'>
                         <c:choose>
                           <c:when test="${pageContext.request.locale.language ne 'cs'}">
                             english
@@ -116,7 +116,7 @@
                       <%-- Otherwise, render widget according to 'language' session attribute --%>
                       <c:otherwise>
                         <c:choose>
-                          <c:when test="${sessionScope.language ne 'cs'}">
+                          <c:when test="${language ne 'cs'}">
                             english
                           </c:when>
                           <c:otherwise>
@@ -128,7 +128,7 @@
                         </c:choose> |
 
                         <c:choose>
-                          <c:when test="${sessionScope.language eq 'cs'}">
+                          <c:when test="${language eq 'cs'}">
                             česky
                           </c:when>
                           <c:otherwise>
@@ -179,7 +179,7 @@
                                 ORDER FAILURE ERROR IS NOT FLAGGED
                             </c:if> --%>
 
-                    <c:if test="${!empty sessionScope.cart && sessionScope.cart.numberOfItems != 0 &&
+                    <c:if test="${!empty cart && cart.numberOfItems != 0 &&
 
                                   !fn:contains(pageContext.request.servletPath,'/checkout') &&
                                   requestScope['javax.servlet.forward.servlet_path'] ne '/checkout' &&
@@ -187,8 +187,8 @@
                                   !fn:contains(pageContext.request.servletPath,'/cart') &&
                                   requestScope['javax.servlet.forward.servlet_path'] ne '/cart' &&
 
-                                  requestScope.validationErrorFlag ne true &&
-                                  requestScope.orderFailureFlag ne true}">
+                                  validationErrorFlag ne true &&
+                                  orderFailureFlag ne true}">
 
                       <a href="<c:url value='checkout'/>" class="rounded bubble">
                         <fmt:message key="proceedCheckout"/>
@@ -205,22 +205,22 @@
                        in cart is 0, output '0', otherwise output 'numberOfItems' --%>
                     <span class="horizontalMargin">
                       <c:choose>
-                        <c:when test="${sessionScope.cart.numberOfItems == null}">
+                        <c:when test="${cart.numberOfItems == null}">
                           0
                         </c:when>
                         <c:otherwise>
-                          ${sessionScope.cart.numberOfItems}
+                          ${cart.numberOfItems}
                         </c:otherwise>
                       </c:choose>
 
                   <%-- Handle singular/plural forms of 'item' --%>
                       <c:choose>
-                        <c:when test="${sessionScope.cart.numberOfItems == 1}">
+                        <c:when test="${cart.numberOfItems == 1}">
                           <fmt:message key="item" />
                         </c:when>
-                        <c:when test="${sessionScope.cart.numberOfItems == 2 ||
-                                        sessionScope.cart.numberOfItems == 3 ||
-                                        sessionScope.cart.numberOfItems == 4}">
+                        <c:when test="${cart.numberOfItems == 2 ||
+                                        cart.numberOfItems == 3 ||
+                                        cart.numberOfItems == 4}">
                           <fmt:message key="items2-4" />
                         </c:when>
                         <c:otherwise>
@@ -229,7 +229,7 @@
                       </c:choose>
                     </span>
 
-                    <c:if test="${!empty sessionScope.cart && sessionScope.cart.numberOfItems != 0 &&
+                    <c:if test="${!empty cart && cart.numberOfItems != 0 &&
 
                                   !fn:contains(pageContext.request.servletPath,'/cart') &&
                                   requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">

@@ -57,17 +57,16 @@
 
     <session-config>
         <session-timeout>
-            10
+            1
         </session-timeout>
     </session-config>
 
-<!--
-    not required for Servlet 3.0 - index is default
-    <welcome-file-list>
+<!--Not required for Servlet 3.0 - index.jsp is default-->
+<!--<welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>-->
 
-    <!--This is only needed for testing the datasource (TestDataSource.jsp)-->
+<!--This is only needed for testing the datasource (TestDataSource.jsp)-->
 <!--<resource-ref>
         <description>jdbc:mysql://localhost:3306/affablebean</description>
         <res-ref-name>jdbc/affablebean</res-ref-name>

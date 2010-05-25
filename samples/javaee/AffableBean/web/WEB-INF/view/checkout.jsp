@@ -14,15 +14,13 @@
      users view the same page when switching between EN and CS. --%>
 <c:set var="view" value="/checkout" scope="session"/>
 
-<c:set var="cart" value="${sessionScope.cart}"/>
-
 
 <script src="js/jquery.validate.js" type="text/javascript"></script>
 
 <%-- Add Czech field validation messages if 'cs' is the chosen locale --%>
 <c:choose>
   <%-- When 'language' session attribute hasn't been set, check browser's preferred locale --%>
-  <c:when test="${empty sessionScope.language}">
+  <c:when test="${empty language}">
     <c:if test="${pageContext.request.locale.language eq 'cs'}">
       <script src="js/localization/messages_cs.js" type="text/javascript"></script>
     </c:if>
@@ -71,33 +69,33 @@
 
     <p><fmt:message key="checkoutText"/></p>
 
-    <c:if test="${!empty requestScope.orderFailureFlag}">
+    <c:if test="${!empty orderFailureFlag}">
         <p class="errorMessage"><fmt:message key="orderFailureError"/></p>
     </c:if>
 
     <form id="checkoutForm" action="purchase" method="post">
         <table id="checkoutTable" class="rounded">
-            <c:if test="${!empty requestScope.validationErrorFlag}">
+            <c:if test="${!empty validationErrorFlag}">
                 <tr>
                     <td colspan="2" style="text-align:left">
                         <span class="errorMessage smallText"><fmt:message key="validationErrorMessage"/>
 
-                          <c:if test="${!empty requestScope.nameError}">
+                          <c:if test="${!empty nameError}">
                             <br><span class="indent"><fmt:message key="nameError"/></span>
                           </c:if>
-                          <c:if test="${!empty requestScope.emailError}">
+                          <c:if test="${!empty emailError}">
                             <br><span class="indent"><fmt:message key="emailError"/></span>
                           </c:if>
-                          <c:if test="${!empty requestScope.phoneError}">
+                          <c:if test="${!empty phoneError}">
                             <br><span class="indent"><fmt:message key="phoneError"/></span>
                           </c:if>
-                          <c:if test="${!empty requestScope.addressError}">
+                          <c:if test="${!empty addressError}">
                             <br><span class="indent"><fmt:message key="addressError"/></span>
                           </c:if>
-                          <c:if test="${!empty requestScope.cityRegionError}">
+                          <c:if test="${!empty cityRegionError}">
                             <br><span class="indent"><fmt:message key="cityRegionError"/></span>
                           </c:if>
-                          <c:if test="${!empty requestScope.ccNumberError}">
+                          <c:if test="${!empty ccNumberError}">
                             <br><span class="indent"><fmt:message key="ccNumberError"/></span>
                           </c:if>
 
