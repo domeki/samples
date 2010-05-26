@@ -16,10 +16,10 @@ import entity.Product;
  */
 public class ShoppingCartItem {
 
-    Object item;
+    Product item;
     int quantity;
 
-    public ShoppingCartItem(Object item) {
+    public ShoppingCartItem(Product item) {
         this.item = item;
         quantity = 1;
     }
@@ -32,7 +32,7 @@ public class ShoppingCartItem {
         quantity--;
     }
 
-    public Object getItem() {
+    public Product getItem() {
         return item;
     }
 
@@ -47,9 +47,9 @@ public class ShoppingCartItem {
     public double getTotal() {
         double amount = 0;
 
-        Product productDetails = (Product) this.getItem();
+        Product product = this.getItem();
 
-        amount = (this.getQuantity() * productDetails.getPrice().doubleValue());
+        amount = (this.getQuantity() * product.getPrice().doubleValue());
 
         return amount;
     }
