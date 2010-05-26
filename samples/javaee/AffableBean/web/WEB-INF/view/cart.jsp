@@ -79,9 +79,9 @@
                 <th><fmt:message key="quantity"/></th>
             </tr>
 
-            <c:forEach var="itemMap" items="${cart.items}" varStatus="iter">
+            <c:forEach var="cartItem" items="${cart.items}" varStatus="iter">
 
-                <c:set var="product" value="${itemMap.value.item}"/>
+                <c:set var="product" value="${cartItem.product}"/>
 
                 <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
                     <td>
@@ -92,7 +92,7 @@
                     <td><fmt:message key="${product.name}"/></td>
 
                     <td>
-                        <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${itemMap.value.total}"/>
+                        <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${cartItem.total}"/>
                         <br>
                         <span class="smallText">(
                             <fmt:formatNumber type="currency" currencySymbol="&euro; " value="${product.price}"/>
@@ -107,7 +107,7 @@
                             <input type="text"
                                    maxlength="2"
                                    size="2"
-                                   value="${itemMap.value.quantity}"
+                                   value="${cartItem.quantity}"
                                    name="quantity"
                                    style="margin:5px">
                             <input type="submit"

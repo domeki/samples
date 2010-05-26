@@ -210,7 +210,7 @@ public class ControllerServlet extends HttpServlet {
             if (!productId.isEmpty()) {
 
                 product = productFacade.find(Integer.parseInt(productId));
-                cart.addItem(productId, product);
+                cart.addItem(product);
             }
 
             userPath = "/category";
@@ -231,7 +231,7 @@ public class ControllerServlet extends HttpServlet {
             if (!invalidEntry) {
 
                 product = productFacade.find(Integer.parseInt(productId));
-                cart.update(productId, product, quantity);
+                cart.update(product, quantity);
             }
 
             userPath = "/cart";

@@ -17,28 +17,46 @@ import java.util.*;
  */
 public class ShoppingCart {
 
-    HashMap<String, ShoppingCartItem> items;
+    List<ShoppingCartItem> items;
     int numberOfItems;
     double total;
 
     public ShoppingCart() {
-        items = new HashMap<String, ShoppingCartItem>();
+        items = new ArrayList<ShoppingCartItem>();
         numberOfItems = 0;
         total = 0;
     }
 
-    public synchronized void addItem(String productId, Product product) {
+    /**
+     * Adds a <code>ShoppingCartItem</code> to the <code>ShoppingCart</code>.
+     * If item of the provided Product already exists in shopping cart, the
+     * quantity of that item is incremented.
+     */
+    public synchronized void addItem(Product product) {
 
-        if (items.containsKey(productId)) {
-            ShoppingCartItem scitem = (ShoppingCartItem) items.get(productId);
-            scitem.incrementQuantity();
-        } else {
-            ShoppingCartItem newItem = new ShoppingCartItem(product);
-            items.put(productId, newItem);
+        boolean newItem = true;
+
+        for (ShoppingCartItem scItem : items) {
+
+            if (scItem.getProduct().getId() == product.getId()) {
+
+                newItem = false;
+                scItem.incrementQuantity();
+            }
+        }
+
+        if (newItem) {
+            ShoppingCartItem scItem = new ShoppingCartItem(product);
+            items.add(scItem);
         }
     }
 
-    public synchronized void update(String productId, Product product, String quantity) {
+    /**
+     * Updates the <code>ShoppingCartItem</code> of the provided
+     * <code>Product</code> to the specified quantity. If '<code>0</code>'
+     * is the given quantity, the cart item is removed from the cart.
+     */
+    public synchronized void update(Product product, String quantity) {
 
         int qty = -1;
 
@@ -46,81 +64,95 @@ public class ShoppingCart {
         qty = Integer.parseInt(quantity);
 
         if (qty >= 0) {
-            if (items.containsKey(productId)) {
-                ShoppingCartItem shoppingCartItem = (ShoppingCartItem) items.get(productId);
-                if (qty != 0) {
-                    // set item quantity to new value
-                    shoppingCartItem.setQuantity(qty);
-                } else {
-                    // if quantity equals 0, remove from cart
-                    Iterator iterator = (items.keySet()).iterator();
 
-                    String keyMatch = "";
+            ShoppingCartItem item = null;
 
-                    while (iterator.hasNext()) {
-                        String key = iterator.next().toString();
-                        ShoppingCartItem value = items.get(key);
-                        if (value.equals(shoppingCartItem)) {
-                            // retain key
-                            keyMatch = key;
-                        }
-                    } //end while loop
+            for (ShoppingCartItem scItem : items) {
 
-                    items.remove(keyMatch);
+                if (scItem.getProduct().getId() == product.getId()) {
+
+                    if (qty != 0) {
+                        // set item quantity to new value
+                        scItem.setQuantity(qty);
+                    } else {
+                        // if quantity equals 0, save item and break
+                        item = scItem;
+                        break;
+                    }
                 }
+            }
+
+            if (item != null) {
+                // remove from cart
+                items.remove(item);
             }
         }
     }
 
-    public synchronized HashMap<String, ShoppingCartItem> getItems() {
+    public synchronized List<ShoppingCartItem> getItems() {
 
         return items;
     }
 
+    /**
+     * Returns the sum quantities for all
+     * items maintained in shopping cart list
+     */
     public synchronized int getNumberOfItems() {
+
         numberOfItems = 0;
 
-        Iterator it = items.keySet().iterator();
+        for (ShoppingCartItem scItem : items) {
 
-        while(it.hasNext()) {
-            Object productId = it.next();
-            ShoppingCartItem item = (ShoppingCartItem) items.get(productId.toString());
-            numberOfItems += item.getQuantity();
+            numberOfItems += scItem.getQuantity();
         }
 
         return numberOfItems;
     }
 
+    /**
+     * Returns the sum of the product price multiplied by
+     * the quantity for all items in shopping cart list
+     */
     public synchronized double getSubtotal() {
+
         double amount = 0;
 
-        Iterator it = items.keySet().iterator();
+        for (ShoppingCartItem scItem : items) {
 
-        while(it.hasNext()) {
-            Object productId = it.next();
-            ShoppingCartItem item = (ShoppingCartItem) items.get(productId.toString());
-            Product productDetails = (Product) item.getItem();
-
-            amount += (item.getQuantity() * productDetails.getPrice().doubleValue());
+            Product product = (Product) scItem.getProduct();
+            amount += (scItem.getQuantity() * product.getPrice().doubleValue());
         }
 
         return amount;
     }
 
+    /**
+     * Returns the sum of the subtotal with the specified surcharge
+     */
     public synchronized void calculateTotal(String surcharge) {
-        double s = Double.parseDouble(surcharge);
+
         double amount = 0;
 
-        amount = getSubtotal();
-        amount = amount + s;
+        // cast surcharge as double
+        double s = Double.parseDouble(surcharge);
+
+        amount = this.getSubtotal();
+        amount += s;
 
         total = amount;
     }
 
     public synchronized double getTotal() {
+
         return total;
     }
 
+    /**
+     * Empties the shopping cart. All items are removed
+     * from the shopping cart list, <code>numberOfItems</code>
+     * and <code>total</code> are reset to '<code>0</code>'.
+     */
     public synchronized void clear() {
         items.clear();
         numberOfItems = 0;

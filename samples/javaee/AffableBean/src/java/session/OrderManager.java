@@ -12,7 +12,6 @@ import cart.*;
 import entity.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Resource;
@@ -60,7 +59,31 @@ public class OrderManager {
         }
     }
 
-    public Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
+    public void getOrderDetails(int orderId, HttpServletRequest request) {
+
+        CustomerOrder order = customerOrderFacade.find(orderId);
+
+        List<OrderedProduct> orderedProducts = orderedProductFacade.findByOrderId(orderId);
+
+        List<Product> products = new ArrayList<Product>();
+
+        for (OrderedProduct op : orderedProducts) {
+
+            Product p = (Product) productFacade.find(op.getOrderedProductPK().getProductId());
+            products.add(p);
+        }
+
+        // get customer details
+        Customer customer = order.getCustomerId();
+
+        // place in request scope
+        request.setAttribute("orderRecord", order);
+        request.setAttribute("orderedProducts", orderedProducts);
+        request.setAttribute("products", products);
+        request.setAttribute("customer", customer);
+    }
+
+    protected Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
 
         Customer customer = new Customer();
         customer.setName(name);
@@ -74,7 +97,7 @@ public class OrderManager {
         return customer;
     }
 
-    public CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
+    protected CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
 
         // set up customer order
         CustomerOrder order = new CustomerOrder();
@@ -90,57 +113,30 @@ public class OrderManager {
         return order;
     }
 
-    public void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
+    protected void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
 
         em.flush();
 
-        Iterator it = cart.getItems().keySet().iterator();
+        List<ShoppingCartItem> items = cart.getItems();
 
         // iterate through shopping cart and add items to OrderedProduct
-        while(it.hasNext()) {
+        for (ShoppingCartItem scItem : items) {
 
-            String s = (String)it.next();
-            int productId = Integer.parseInt(s);
+            int productId = scItem.getProduct().getId();
 
             // set up primary key object
-            OrderedProductPK orderedItemPK = new OrderedProductPK();
-            orderedItemPK.setOrderId(order.getId());
-            orderedItemPK.setProductId(productId);
+            OrderedProductPK orderedProductPK = new OrderedProductPK();
+            orderedProductPK.setOrderId(order.getId());
+            orderedProductPK.setProductId(productId);
 
             // create ordered item using PK object
-            OrderedProduct orderedItem = new OrderedProduct(orderedItemPK);
+            OrderedProduct orderedItem = new OrderedProduct(orderedProductPK);
 
             // set quantity
-            ShoppingCartItem item = (ShoppingCartItem) cart.getItems().get(String.valueOf(productId));
-            orderedItem.setQuantity(String.valueOf(item.getQuantity()));
+            orderedItem.setQuantity(String.valueOf(scItem.getQuantity()));
 
             em.persist(orderedItem);
         }
     }
 
-    public void getOrderDetails(int orderId, HttpServletRequest request) {
-
-        CustomerOrder order = customerOrderFacade.find(orderId);
-
-        List<OrderedProduct> orderedProducts = orderedProductFacade.findByOrderId(orderId);
-
-        Iterator iter = orderedProducts.iterator();
-        List<Product> products = new ArrayList<Product>();
-
-        while (iter.hasNext()) {
-            OrderedProduct o = (OrderedProduct) iter.next();
-            Product p = (Product) productFacade.find(o.getOrderedProductPK().getProductId());
-            products.add(p);
-        }
-
-        // get customer details
-        Customer customer = order.getCustomerId();
-
-        // place in request scope
-        request.setAttribute("orderRecord", order);
-        request.setAttribute("orderedProducts", orderedProducts);
-        request.setAttribute("products", products);
-        request.setAttribute("customer", customer);
-    }
- 
 }

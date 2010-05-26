@@ -16,24 +16,16 @@ import entity.Product;
  */
 public class ShoppingCartItem {
 
-    Product item;
+    Product product;
     int quantity;
 
-    public ShoppingCartItem(Product item) {
-        this.item = item;
+    public ShoppingCartItem(Product product) {
+        this.product = product;
         quantity = 1;
     }
 
-    public void incrementQuantity() {
-        quantity++;
-    }
-
-    public void decrementQuantity() {
-        quantity--;
-    }
-
-    public Product getItem() {
-        return item;
+    public Product getProduct() {
+        return product;
     }
 
     public int getQuantity() {
@@ -44,13 +36,17 @@ public class ShoppingCartItem {
         this.quantity = quantity;
     }
 
+    public void incrementQuantity() {
+        quantity++;
+    }
+
+    public void decrementQuantity() {
+        quantity--;
+    }
+
     public double getTotal() {
         double amount = 0;
-
-        Product product = this.getItem();
-
         amount = (this.getQuantity() * product.getPrice().doubleValue());
-
         return amount;
     }
 
