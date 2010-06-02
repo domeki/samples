@@ -30,7 +30,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <a href="<c:url value="category?${category.id}"/>" class="rounded categoryButton">
+                <a href="<c:url value='category?${category.id}'/>" class="rounded categoryButton">
                     <span class="categoryText">
                         <fmt:message key="${category.name}"/>
                     </span>

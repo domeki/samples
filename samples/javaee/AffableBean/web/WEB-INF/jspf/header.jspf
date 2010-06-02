@@ -196,7 +196,7 @@
                     </c:if>
                   </div>
 
-                <%-- view cart widget --%>
+                <%-- shopping cart widget --%>
                   <div class="headerWidget" id="viewCart">
 
                     <img src="/AffableBean/img/cart.gif" alt="shopping cart icon" id="cart">
