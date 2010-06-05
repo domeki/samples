@@ -86,7 +86,7 @@
 
           <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
             <td>
-                <img src="<c:out value="${initParam.productImagePath}${product.name}"/>.png"
+                <img src="${initParam.productImagePath}${product.name}.png"
                      alt="image of <fmt:message key="${product.name}"/>">
             </td>
 
@@ -104,7 +104,7 @@
                 <form action="<c:url value='updateCart'/>" method="post">
                     <input type="hidden"
                            name="productId"
-                           value="<c:out value='${product.id}'/>">
+                           value="${product.id}">
                     <input type="text"
                            maxlength="2"
                            size="2"

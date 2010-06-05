@@ -55,7 +55,7 @@
 
             <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
                 <td>
-                    <img src="<c:out value='${initParam.productImagePath}${product.name}.png'/>"
+                    <img src="${initParam.productImagePath}${product.name}.png"
                         alt="image of <fmt:message key='${product.name}'/>">
                 </td>
 
