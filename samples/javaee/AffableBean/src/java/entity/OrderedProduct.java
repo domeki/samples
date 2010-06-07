@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "ordered_product")
 @NamedQueries({
     @NamedQuery(name = "OrderedProduct.findAll", query = "SELECT o FROM OrderedProduct o"),
-    @NamedQuery(name = "OrderedProduct.findByOrderId", query = "SELECT o FROM OrderedProduct o WHERE o.orderedProductPK.orderId = :orderId"),
+    @NamedQuery(name = "OrderedProduct.findByCustomerOrderId", query = "SELECT o FROM OrderedProduct o WHERE o.orderedProductPK.customerOrderId = :customerOrderId"),
     @NamedQuery(name = "OrderedProduct.findByProductId", query = "SELECT o FROM OrderedProduct o WHERE o.orderedProductPK.productId = :productId"),
     @NamedQuery(name = "OrderedProduct.findByQuantity", query = "SELECT o FROM OrderedProduct o WHERE o.quantity = :quantity")})
 public class OrderedProduct implements Serializable {
@@ -37,12 +37,12 @@ public class OrderedProduct implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantity")
     private String quantity;
-    @JoinColumn(name = "order_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private CustomerOrder customerOrder;
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Product product;
+    @JoinColumn(name = "customer_order_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private CustomerOrder customerOrder;
 
     public OrderedProduct() {
     }
@@ -56,8 +56,8 @@ public class OrderedProduct implements Serializable {
         this.quantity = quantity;
     }
 
-    public OrderedProduct(int orderId, int productId) {
-        this.orderedProductPK = new OrderedProductPK(orderId, productId);
+    public OrderedProduct(int customerOrderId, int productId) {
+        this.orderedProductPK = new OrderedProductPK(customerOrderId, productId);
     }
 
     public OrderedProductPK getOrderedProductPK() {
@@ -76,20 +76,20 @@ public class OrderedProduct implements Serializable {
         this.quantity = quantity;
     }
 
-    public CustomerOrder getCustomerOrder() {
-        return customerOrder;
-    }
-
-    public void setCustomerOrder(CustomerOrder customerOrder) {
-        this.customerOrder = customerOrder;
-    }
-
     public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public CustomerOrder getCustomerOrder() {
+        return customerOrder;
+    }
+
+    public void setCustomerOrder(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
     }
 
     @Override

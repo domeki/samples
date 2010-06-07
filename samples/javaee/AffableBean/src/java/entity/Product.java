@@ -59,7 +59,7 @@ public class Product implements Serializable {
     private Date lastUpdate;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Category categoryId;
+    private Category category;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<OrderedProduct> orderedProductCollection;
 
@@ -109,12 +109,12 @@ public class Product implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Collection<OrderedProduct> getOrderedProductCollection() {

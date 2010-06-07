@@ -84,7 +84,7 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("customerRecord", customer);
 
             // get customer order details
-            order = customerOrderFacade.findByCustomerId(customer);
+            order = customerOrderFacade.findByCustomer(customer);
             request.setAttribute("order", order);
         }
 

@@ -20,8 +20,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class OrderedProductPK implements Serializable {
     @Basic(optional = false)
-    @Column(name = "order_id")
-    private int orderId;
+    @Column(name = "customer_order_id")
+    private int customerOrderId;
     @Basic(optional = false)
     @Column(name = "product_id")
     private int productId;
@@ -29,17 +29,17 @@ public class OrderedProductPK implements Serializable {
     public OrderedProductPK() {
     }
 
-    public OrderedProductPK(int orderId, int productId) {
-        this.orderId = orderId;
+    public OrderedProductPK(int customerOrderId, int productId) {
+        this.customerOrderId = customerOrderId;
         this.productId = productId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getCustomerOrderId() {
+        return customerOrderId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCustomerOrderId(int customerOrderId) {
+        this.customerOrderId = customerOrderId;
     }
 
     public int getProductId() {
@@ -53,7 +53,7 @@ public class OrderedProductPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) orderId;
+        hash += (int) customerOrderId;
         hash += (int) productId;
         return hash;
     }
@@ -65,7 +65,7 @@ public class OrderedProductPK implements Serializable {
             return false;
         }
         OrderedProductPK other = (OrderedProductPK) object;
-        if (this.orderId != other.orderId) {
+        if (this.customerOrderId != other.customerOrderId) {
             return false;
         }
         if (this.productId != other.productId) {
@@ -76,7 +76,7 @@ public class OrderedProductPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.OrderedProductPK[orderId=" + orderId + ", productId=" + productId + "]";
+        return "entity.OrderedProductPK[customerOrderId=" + customerOrderId + ", productId=" + productId + "]";
     }
 
 }

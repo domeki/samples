@@ -74,7 +74,7 @@ public class OrderManager {
         }
 
         // get customer details
-        Customer customer = order.getCustomerId();
+        Customer customer = order.getCustomer();
 
         // place in request scope
         request.setAttribute("orderRecord", order);
@@ -101,7 +101,7 @@ public class OrderManager {
 
         // set up customer order
         CustomerOrder order = new CustomerOrder();
-        order.setCustomerId(customer);
+        order.setCustomer(customer);
         order.setAmount(BigDecimal.valueOf(cart.getTotal()));
 
         // create confirmation number
@@ -126,7 +126,7 @@ public class OrderManager {
 
             // set up primary key object
             OrderedProductPK orderedProductPK = new OrderedProductPK();
-            orderedProductPK.setOrderId(order.getId());
+            orderedProductPK.setCustomerOrderId(order.getId());
             orderedProductPK.setProductId(productId);
 
             // create ordered item using PK object
