@@ -12,6 +12,7 @@ import entity.CustomerOrder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
@@ -94,7 +95,14 @@ public class AdminServlet extends HttpServlet {
             // get customer id from request
             String orderId = request.getQueryString();
 
-            orderManager.getOrderDetails(Integer.parseInt(orderId), request);
+            // get order details
+            Map orderMap = orderManager.getOrderDetails(Integer.parseInt(orderId));
+
+            // place order details in request scope
+            request.setAttribute("customer", orderMap.get("customer"));
+            request.setAttribute("products", orderMap.get("products"));
+            request.setAttribute("orderRecord", orderMap.get("orderRecord"));
+            request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
         }
 
         // if logout is requested

@@ -13,6 +13,7 @@ import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -267,8 +268,7 @@ public class ControllerServlet extends HttpServlet {
                     // otherwise, save order to database
                 } else {
 
-                    int orderId;
-                    orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
+                    int orderId = orderManager.placeOrder(name, email, phone, address, cityRegion, ccNumber, cart);
 
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
@@ -287,7 +287,13 @@ public class ControllerServlet extends HttpServlet {
                         }                                               // may be switched on confirmation page!
 
                         // get order details
-                        orderManager.getOrderDetails(orderId, request);
+                        Map orderMap = orderManager.getOrderDetails(orderId);
+
+                        // place order details in request scope
+                        request.setAttribute("customer", orderMap.get("customer"));
+                        request.setAttribute("products", orderMap.get("products"));
+                        request.setAttribute("orderRecord", orderMap.get("orderRecord"));
+                        request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
 
                     // otherwise, send back to checkout page and display error
                     } else {
