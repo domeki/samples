@@ -273,8 +273,6 @@ public class ControllerServlet extends HttpServlet {
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
 
-                        userPath = "/confirmation";
-
                         // dissociate shopping cart from session
                         cart = null;
 
@@ -294,6 +292,8 @@ public class ControllerServlet extends HttpServlet {
                         request.setAttribute("products", orderMap.get("products"));
                         request.setAttribute("orderRecord", orderMap.get("orderRecord"));
                         request.setAttribute("orderedProducts", orderMap.get("orderedProducts"));
+
+                        userPath = "/confirmation";
 
                     // otherwise, send back to checkout page and display error
                     } else {
