@@ -75,34 +75,34 @@
 
     <form id="checkoutForm" action="<c:url value='purchase'/>" method="post">
         <table id="checkoutTable" class="rounded">
-            <c:if test="${!empty validationErrorFlag}">
-                <tr>
-                    <td colspan="2" style="text-align:left">
-                        <span class="errorMessage smallText"><fmt:message key="validationErrorMessage"/>
+          <c:if test="${!empty validationErrorFlag}">
+            <tr>
+                <td colspan="2" style="text-align:left">
+                    <span class="errorMessage smallText"><fmt:message key="validationErrorMessage"/>
 
-                          <c:if test="${!empty nameError}">
-                            <br><span class="indent"><fmt:message key="nameError"/></span>
-                          </c:if>
-                          <c:if test="${!empty emailError}">
-                            <br><span class="indent"><fmt:message key="emailError"/></span>
-                          </c:if>
-                          <c:if test="${!empty phoneError}">
-                            <br><span class="indent"><fmt:message key="phoneError"/></span>
-                          </c:if>
-                          <c:if test="${!empty addressError}">
-                            <br><span class="indent"><fmt:message key="addressError"/></span>
-                          </c:if>
-                          <c:if test="${!empty cityRegionError}">
-                            <br><span class="indent"><fmt:message key="cityRegionError"/></span>
-                          </c:if>
-                          <c:if test="${!empty ccNumberError}">
-                            <br><span class="indent"><fmt:message key="ccNumberError"/></span>
-                          </c:if>
+                      <c:if test="${!empty nameError}">
+                        <br><span class="indent"><fmt:message key="nameError"/></span>
+                      </c:if>
+                      <c:if test="${!empty emailError}">
+                        <br><span class="indent"><fmt:message key="emailError"/></span>
+                      </c:if>
+                      <c:if test="${!empty phoneError}">
+                        <br><span class="indent"><fmt:message key="phoneError"/></span>
+                      </c:if>
+                      <c:if test="${!empty addressError}">
+                        <br><span class="indent"><fmt:message key="addressError"/></span>
+                      </c:if>
+                      <c:if test="${!empty cityRegionError}">
+                        <br><span class="indent"><fmt:message key="cityRegionError"/></span>
+                      </c:if>
+                      <c:if test="${!empty ccNumberError}">
+                        <br><span class="indent"><fmt:message key="ccNumberError"/></span>
+                      </c:if>
 
-                        </span>
-                    </td>
-                </tr>
-            </c:if>
+                    </span>
+                </td>
+            </tr>
+          </c:if>
             <tr>
                 <td><label for="name"><fmt:message key="customerName"/>:</label></td>
                 <td class="inputField">

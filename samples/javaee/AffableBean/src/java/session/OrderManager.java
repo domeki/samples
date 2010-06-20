@@ -60,7 +60,7 @@ public class OrderManager {
         }
     }
 
-    protected Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
+    private Customer addCustomer(String name, String email, String phone, String address, String cityRegion, String ccNumber) {
 
         Customer customer = new Customer();
         customer.setName(name);
@@ -74,7 +74,7 @@ public class OrderManager {
         return customer;
     }
 
-    protected CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
+    private CustomerOrder addOrder(Customer customer, ShoppingCart cart) {
 
         // set up customer order
         CustomerOrder order = new CustomerOrder();
@@ -90,13 +90,13 @@ public class OrderManager {
         return order;
     }
 
-    protected void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
+    private void addOrderedItems(CustomerOrder order, ShoppingCart cart) {
 
         em.flush();
 
         List<ShoppingCartItem> items = cart.getItems();
 
-        // iterate through shopping cart and add items to OrderedProduct
+        // iterate through shopping cart and create OrderedProducts
         for (ShoppingCartItem scItem : items) {
 
             int productId = scItem.getProduct().getId();
