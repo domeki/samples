@@ -45,7 +45,7 @@ Before running the application,
 
     c. Click the Run SQL button to run the script.
 
- 8. It is necessary to enable automatic driver deployment on the server. This is because the
+ 6. It is necessary to enable automatic driver deployment on the server. This is because the
     GlassFish server doesn't contain the MySQL driver. Choose Tools > Servers, and select the
     GlassFish server in the left pane. Then in the right pane, select the 'Enable JDBC Driver
     Deployment' option. (The option is enabled by default.)
