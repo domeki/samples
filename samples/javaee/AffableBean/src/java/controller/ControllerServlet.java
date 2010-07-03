@@ -42,7 +42,6 @@ public class ControllerServlet extends HttpServlet {
 
     private String userPath;
     private String surcharge;
-    private ShoppingCart cart;
 
     @EJB
     private CategoryFacade categoryFacade;
@@ -76,8 +75,9 @@ public class ControllerServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         userPath = request.getServletPath();
-        Category selectedCategory;
         List<Product> categoryProducts;
+        Category selectedCategory;
+        ShoppingCart cart;
 
         // if category page is requested
         if (userPath.equals("/category")) {
@@ -181,6 +181,7 @@ public class ControllerServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         Validator validator = new Validator();
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
         userPath = request.getServletPath();
         String productId;
