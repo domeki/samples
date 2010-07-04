@@ -15,6 +15,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
+<!--Annotations in the servlet are used instead of <servlet> and <servlet-mapping> entries below-->
 <!--<servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>controller.ControllerServlet</servlet-class>
@@ -57,7 +58,7 @@
 
     <session-config>
         <session-timeout>
-            1
+            10
         </session-timeout>
     </session-config>
 

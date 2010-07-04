@@ -14,6 +14,9 @@
      users view the same page when switching between EN and CS. --%>
 <c:set var="view" value="/confirmation" scope="session"/>
 
+
+<%-- HTML markup starts below --%>
+
 <div id="singleColumn">
 
     <p id="confirmationText" class="rounded">
