@@ -17,7 +17,7 @@ import entity.Product;
 public class ShoppingCartItem {
 
     Product product;
-    int quantity;
+    short quantity;
 
     public ShoppingCartItem(Product product) {
         this.product = product;
@@ -28,11 +28,11 @@ public class ShoppingCartItem {
         return product;
     }
 
-    public int getQuantity() {
+    public short getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(short quantity) {
         this.quantity = quantity;
     }
 

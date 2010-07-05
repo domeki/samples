@@ -110,7 +110,7 @@ public class OrderManager {
             OrderedProduct orderedItem = new OrderedProduct(orderedProductPK);
 
             // set quantity
-            orderedItem.setQuantity(String.valueOf(scItem.getQuantity()));
+            orderedItem.setQuantity(scItem.getQuantity());
 
             em.persist(orderedItem);
         }

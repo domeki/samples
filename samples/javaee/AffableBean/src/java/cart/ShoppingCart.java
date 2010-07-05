@@ -58,10 +58,10 @@ public class ShoppingCart {
      */
     public synchronized void update(Product product, String quantity) {
 
-        int qty = -1;
+        short qty = -1;
 
-        // cast quantity as int
-        qty = Integer.parseInt(quantity);
+        // cast quantity as short
+        qty = Short.parseShort(quantity);
 
         if (qty >= 0) {
 

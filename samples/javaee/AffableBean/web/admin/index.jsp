@@ -77,14 +77,14 @@
                 <td><a href="orderRecord?${order.id}" class="noDecoration">${order.confirmationNumber}</a></td>
                 <td><a href="orderRecord?${order.id}" class="noDecoration">
                         <fmt:formatNumber type="currency"
-                                      currencySymbol="&euro; "
-                                      value="${order.amount}"/></a></td>
+                                          currencySymbol="&euro; "
+                                          value="${order.amount}"/></a></td>
 
                 <td><a href="orderRecord?${order.id}" class="noDecoration">
                         <fmt:formatDate value="${order.dateCreated}"
-                                    type="both"
-                                    dateStyle="short"
-                                    timeStyle="short"/></a></td>
+                                        type="both"
+                                        dateStyle="short"
+                                        timeStyle="short"/></a></td>
             </tr>
 
         </c:forEach>

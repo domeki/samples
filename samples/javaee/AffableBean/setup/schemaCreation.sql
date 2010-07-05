@@ -102,7 +102,7 @@ DROP TABLE IF EXISTS `affablebean`.`ordered_product` ;
 CREATE  TABLE IF NOT EXISTS `affablebean`.`ordered_product` (
   `customer_order_id` INT UNSIGNED NOT NULL ,
   `product_id` INT UNSIGNED NOT NULL ,
-  `quantity` VARCHAR(4) NOT NULL DEFAULT '1' ,
+  `quantity` SMALLINT UNSIGNED NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`customer_order_id`, `product_id`) ,
   INDEX `fk_ordered_product_customer_order` (`customer_order_id` ASC) ,
   INDEX `fk_ordered_product_product` (`product_id` ASC) ,

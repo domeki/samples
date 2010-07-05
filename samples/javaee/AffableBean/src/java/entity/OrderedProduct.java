@@ -36,7 +36,7 @@ public class OrderedProduct implements Serializable {
     protected OrderedProductPK orderedProductPK;
     @Basic(optional = false)
     @Column(name = "quantity")
-    private String quantity;
+    private short quantity;
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Product product;
@@ -51,7 +51,7 @@ public class OrderedProduct implements Serializable {
         this.orderedProductPK = orderedProductPK;
     }
 
-    public OrderedProduct(OrderedProductPK orderedProductPK, String quantity) {
+    public OrderedProduct(OrderedProductPK orderedProductPK, short quantity) {
         this.orderedProductPK = orderedProductPK;
         this.quantity = quantity;
     }
@@ -68,11 +68,11 @@ public class OrderedProduct implements Serializable {
         this.orderedProductPK = orderedProductPK;
     }
 
-    public String getQuantity() {
+    public short getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(short quantity) {
         this.quantity = quantity;
     }
 

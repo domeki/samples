@@ -35,7 +35,7 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
         CustomerOrder order = em.find(CustomerOrder.class, id);
         em.refresh(order);
         return order;
-    }
+}
 
     // manually created
     // in this implementation, there is only one order per customer

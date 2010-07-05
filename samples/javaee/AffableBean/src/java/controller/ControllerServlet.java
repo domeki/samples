@@ -40,7 +40,6 @@ import validate.Validator;
 
 public class ControllerServlet extends HttpServlet {
 
-    private String userPath;
     private String surcharge;
 
     @EJB
@@ -74,10 +73,8 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        userPath = request.getServletPath();
-        List<Product> categoryProducts;
-        Category selectedCategory;
-        ShoppingCart cart;
+        String userPath = request.getServletPath();
+
 
         // if category page is requested
         if (userPath.equals("/category")) {
@@ -88,13 +85,13 @@ public class ControllerServlet extends HttpServlet {
             if (categoryId != null) {
 
                 // get selected category
-                selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
+                Category selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
 
                 // place selected category in session scope
                 session.setAttribute("selectedCategory", selectedCategory);
 
                 // get all products for selected category
-                categoryProducts = productFacade.findForCategory(selectedCategory);
+                List<Product> categoryProducts = productFacade.findForCategory(selectedCategory);
 
                 // place category products in session scope
                 session.setAttribute("categoryProducts", categoryProducts);
@@ -108,7 +105,7 @@ public class ControllerServlet extends HttpServlet {
 
             if ((clear != null) && clear.equals("true")) {
 
-                cart = (ShoppingCart) session.getAttribute("cart");
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
                 cart.clear();
             }
 
@@ -118,7 +115,7 @@ public class ControllerServlet extends HttpServlet {
         // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
 
-            cart = (ShoppingCart) session.getAttribute("cart");
+            ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
             // calculate total
             cart.calculateTotal(surcharge);
@@ -180,12 +177,9 @@ public class ControllerServlet extends HttpServlet {
                                                 // 8-bit Unicode (e.g., for Czech characters)
 
         HttpSession session = request.getSession();
-        Validator validator = new Validator();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-
-        userPath = request.getServletPath();
-        String productId;
-        Product product;
+        String userPath = request.getServletPath();
+        Validator validator = new Validator();
 
 
         // if addToCart action is called
@@ -207,11 +201,11 @@ public class ControllerServlet extends HttpServlet {
             }
 
             // get user input from request
-            productId = request.getParameter("productId");
+            String productId = request.getParameter("productId");
 
             if (!productId.isEmpty()) {
 
-                product = productFacade.find(Integer.parseInt(productId));
+                Product product = productFacade.find(Integer.parseInt(productId));
                 cart.addItem(product);
             }
 
@@ -226,13 +220,13 @@ public class ControllerServlet extends HttpServlet {
             cart = (ShoppingCart) session.getAttribute("cart");
 
             // get user input from request
-            productId = request.getParameter("productId");
+            String productId = request.getParameter("productId");
 
             boolean invalidEntry = validator.validateQuantity(productId, quantity);
 
             if (!invalidEntry) {
 
-                product = productFacade.find(Integer.parseInt(productId));
+                Product product = productFacade.find(Integer.parseInt(productId));
                 cart.update(product, quantity);
             }
 
