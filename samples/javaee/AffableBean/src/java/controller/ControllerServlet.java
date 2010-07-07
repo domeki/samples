@@ -37,7 +37,6 @@ import validate.Validator;
                            "/checkout",
                            "/purchase",
                            "/chooseLanguage"})
-
 public class ControllerServlet extends HttpServlet {
 
     private String surcharge;
@@ -215,12 +214,9 @@ public class ControllerServlet extends HttpServlet {
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
 
-            String quantity = request.getParameter("quantity");
-
-            cart = (ShoppingCart) session.getAttribute("cart");
-
-            // get user input from request
+            // get input from request
             String productId = request.getParameter("productId");
+            String quantity = request.getParameter("quantity");
 
             boolean invalidEntry = validator.validateQuantity(productId, quantity);
 
@@ -238,8 +234,6 @@ public class ControllerServlet extends HttpServlet {
 
             // get language choice
             String language = (String) session.getAttribute("language");
-
-            cart = (ShoppingCart) session.getAttribute("cart");
 
             if (cart != null) {
 
