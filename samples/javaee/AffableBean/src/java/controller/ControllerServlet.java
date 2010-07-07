@@ -48,6 +48,7 @@ public class ControllerServlet extends HttpServlet {
     @EJB
     private OrderManager orderManager;
 
+
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
 
@@ -59,6 +60,7 @@ public class ControllerServlet extends HttpServlet {
         // store category list in servlet context
         getServletContext().setAttribute("categories", categoryFacade.findAll());
     }
+
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -175,9 +177,9 @@ public class ControllerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");  // ensures that user input is interpreted as
                                                 // 8-bit Unicode (e.g., for Czech characters)
 
+        String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        String userPath = request.getServletPath();
         Validator validator = new Validator();
 
 
