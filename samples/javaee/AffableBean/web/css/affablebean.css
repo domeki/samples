@@ -6,17 +6,14 @@
  * http://developer.sun.com/berkeley_license.html
  *
  * author: tgiunipero
+ * description: Style rules for the AffableBean application
  */
-
-
-/* Description: Style rules for the AffableBean application */
 
 
 /* html tags */
 body {
     font-family: Arial, Helvetica, sans-serif;
     width: 850px;
-    position: relative;
     text-align: center;
     margin: 20px auto;
     color: #444;
@@ -50,9 +47,58 @@ input, select { margin: 5px }
 
 li { margin: 10px 0 }
 
+label { line-height: 30px }
+
+label.error {
+    font-size: smaller;
+    line-height: 20px;
+    font-style: italic;
+}
+
+
+/* general styles */
+#main { background: #f7f7e9 }
+
+#singleColumn {
+    margin: 20px 30px;
+    text-align: left;
+}
+
+.lightBlue { background-color: #edf8f7 }
+
+.white { background-color: #fff }
+
+.bubble {
+    font-weight: bold;
+    background-color: #f5eabe;
+    padding: 5px;
+    color: inherit;
+}
+
+.hMargin { margin: 0 30px }
+
+.smallText { font-size: small }
+
+.reallySmallText { font-size: xx-small }
+
+.header {
+    background-color: #c3e3e0;
+    height: 30px;
+}
+
+.error {
+    color: #c00;
+    font-style: italic;
+}
+
+.tableHeading {
+    font-weight: bold;
+    background-color: #edf8f7;
+}
+
 
 /* styles for elements contained in the header, i.e.,
-   shopping cart, language widget, and logo */
+   shopping cart widget, language toggle, and logo */
 #header {
     background: url(../img/stalk.png) no-repeat 28px 28px;
     width: 850px;
@@ -60,7 +106,7 @@ li { margin: 10px 0 }
 }
 
 #logo {
-    float:left;
+    float: left;
     margin-left: 30px;
     margin-top: -20px;
 }
@@ -103,6 +149,21 @@ li { margin: 10px 0 }
 }
 
 
+/* footer styles */
+#footer {
+    height: 60px;
+    width: 350px;
+    clear: left;
+}
+
+#footerText { margin-top: 5px }
+
+#footerDivider {
+    margin: 0 25px;
+    width: 300px;
+}
+
+
 /* index page styles */
 #indexLeftColumn {
     text-align: left;
@@ -113,9 +174,9 @@ li { margin: 10px 0 }
 
 #indexRightColumn {
     text-align: left;
-    float: left;
     height: 400px;
     width: 500px;
+    float: left;
 }
 
 #welcomeText {
@@ -136,8 +197,7 @@ li { margin: 10px 0 }
 .categoryLabel {
     position: absolute;
     background-color: #fff;
-    opacity: 0.7;               /* modern browsers */
-    filter: alpha(opacity=70);  /* IE 5.5, IE6 & IE7 */
+    opacity: 0.7;
     height: 40px;
     width: 210px;
     margin: 2px;
@@ -170,17 +230,6 @@ li { margin: 10px 0 }
     float: left;
 }
 
-#categoryTitle {
-    margin: -30px 180px 0 0;
-    font-size: x-large;
-    float: right;
-}
-
-.categoryText {
-    line-height: 25px;
-    font-size: x-large;
-}
-
 .categoryButton {
     margin: 15px 22px;
     padding: 13px;
@@ -196,6 +245,17 @@ a.categoryButton:hover { text-decoration: none }
     width: 139px;
 }
 
+#categoryTitle {
+    margin: -30px 180px 0 0;
+    font-size: x-large;
+    float: right;
+}
+
+.categoryText {
+    line-height: 25px;
+    font-size: x-large;
+}
+
 #productTable {
     width: 600px;
 
@@ -209,7 +269,7 @@ a.categoryButton:hover { text-decoration: none }
 #productTable td { width: 145px }
 
 
-/* shopping cart page styles */
+/* cart page styles */
 #actionBar {
     margin: 30px;
     width: 750px;
@@ -223,11 +283,6 @@ a.categoryButton:hover { text-decoration: none }
 #cartTable td {
     width: 145px;
     height: 90px;
-}
-
-.header {
-    background-color: #c3e3e0;
-    height: 30px;
 }
 
 
@@ -267,15 +322,7 @@ a.categoryButton:hover { text-decoration: none }
 
 .total { border-top: 1px solid #444 }
 
-label { line-height: 30px }
-
-error { line-height: inherit !important }
-
-label.error {
-    font-size: smaller;
-    line-height: 20px;
-    font-style: italic;
-}
+.indent { margin-left: 6em }
 
 
 /* confirmation page styles */
@@ -292,9 +339,7 @@ label.error {
     float: left;
 }
 
-.detailsTable {
-    text-align: left;
-}
+.detailsTable { text-align: left }
 
 .detailsTable th { padding: 5px 10px }
 
@@ -373,64 +418,7 @@ label.error {
     background-color: #edf8f7;
 }
 
-
-/* footer styles */
-#footer {
-    height: 60px;
-    width: 350px;
-    clear: left;
-}
-
-#footerText { margin-top: 5px }
-
-#footerDivider {
-    margin: 0 25px;
-    width: 300px;
-}
-
-
-/* general styles */
-#main {
-    background: #f7f7e9;
-}
-
-#singleColumn {
-    margin: 20px 30px;
-    text-align: left;
-}
-
-.smallText { font-size: small }
-
-.reallySmallText { font-size: xx-small }
-
-.lightBlue { background-color: #edf8f7 }
-
-.white { background-color: #fff }
-
-.bubble {
-    font-weight: bold;
-    background-color: #f5eabe;
-    padding: 5px;
-    color: inherit;
-}
-
-.hMargin { margin: 0 30px }
-
-.error { color: #c00 }
-
-.errorMessage {
-    color: #c00;
-    font-style: italic;
-}
-
-.indent { margin-left: 6em }
-
 .alignLeft { text-align: left }
-
-.tableHeading {
-    font-weight: bold;
-    background-color: #edf8f7;
-}
 
 .selectedRow {
     background-color: #c3e3e0;

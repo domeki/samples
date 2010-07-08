@@ -78,7 +78,7 @@
           <c:if test="${!empty validationErrorFlag}">
             <tr>
                 <td colspan="2" style="text-align:left">
-                    <span class="errorMessage smallText"><fmt:message key="validationErrorMessage"/>
+                    <span class="error smallText"><fmt:message key="validationErrorMessage"/>
 
                       <c:if test="${!empty nameError}">
                         <br><span class="indent"><fmt:message key="nameError"/></span>

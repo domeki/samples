@@ -5,6 +5,7 @@
  * except in compliance with the terms of the license at:
  * http://developer.sun.com/berkeley_license.html
  */
+
 package controller;
 
 import entity.Customer;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
 import session.CustomerFacade;
@@ -32,7 +33,6 @@ import session.OrderManager;
                            "/admin/viewCustomers",
                            "/admin/customerRecord",
                            "/admin/orderRecord"})
-
 public class AdminServlet extends HttpServlet {
 
     @EJB

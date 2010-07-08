@@ -17,7 +17,7 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import session.CategoryFacade;
 import session.OrderManager;
@@ -73,8 +73,10 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
+        Category selectedCategory;
+        List<Product> categoryProducts;
 
 
         // if category page is requested
@@ -86,13 +88,13 @@ public class ControllerServlet extends HttpServlet {
             if (categoryId != null) {
 
                 // get selected category
-                Category selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
+                selectedCategory = categoryFacade.find(Short.parseShort(categoryId));
 
                 // place selected category in session scope
                 session.setAttribute("selectedCategory", selectedCategory);
 
                 // get all products for selected category
-                List<Product> categoryProducts = productFacade.findForCategory(selectedCategory);
+                categoryProducts = productFacade.findForCategory(selectedCategory);
 
                 // place category products in session scope
                 session.setAttribute("categoryProducts", categoryProducts);
@@ -191,13 +193,6 @@ public class ControllerServlet extends HttpServlet {
             if (cart == null) {
 
                 cart = new ShoppingCart();
-                session.setAttribute("cart", cart);
-
-            // if cart object exists but isn't in user session,
-            // empty existing cart object and place in session
-            } else if (session.getAttribute("cart") == null) {
-
-                cart.clear();
                 session.setAttribute("cart", cart);
             }
 
