@@ -138,7 +138,7 @@ public class ControllerServlet extends HttpServlet {
             String userView = (String) session.getAttribute("view");
 
             if ((userView != null) &&
-                (!userView.equals("/index")) &&
+                (!userView.equals("/index")) &&         // index.jsp exists outside 'view' folder
                 (!userView.equals("/confirmation"))) {  // session is destroyed before sending confirmation
                                                         // view, so not possible to change languages there
                 userPath = userView;

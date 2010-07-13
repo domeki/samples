@@ -59,24 +59,8 @@
 
         <title><fmt:message key='title' /></title>
     </head>
+
     <body>
-
-<%--
-	• Use case 1:
-            Locale determined by Accept-Language header (either en or cs chosen)
-
-	• Use case 2:
-            Neither en or cs found in Accept-Language header, so default bundle used
-
-	• Use case 3:
-            User changes language using the provided button
-
-        tests:
-        <c:out value="session locale: ${sessionScope['javax.servlet.jsp.jstl.fmt.locale.session']}" />
-        <br><c:out value="browser's preferred locale: ${pageContext.request.locale.language}"/>
-        <br><%= "request.getLocale(): " + request.getLocale() %>
---%>
-
         <div id="main">
             <div id="header">
                 <div id="widgetBar">
