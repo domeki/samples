@@ -11,7 +11,7 @@
 
 <%-- Set session-scoped variable to track the view user is coming from.
      This is used by the language mechanism in the Controller so that
-     users view the same page when switching between EN and CS. --%>
+     users view the same page when switching between English and Czech. --%>
 <c:set var="view" value="/confirmation" scope="session"/>
 
 

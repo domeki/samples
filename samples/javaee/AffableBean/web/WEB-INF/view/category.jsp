@@ -11,7 +11,7 @@
 
 <%-- Set session-scoped variable to track the view user is coming from.
      This is used by the language mechanism in the Controller so that
-     users view the same page when switching between EN and CS. --%>
+     users view the same page when switching between English and Czech. --%>
 <c:set var="view" value="/category" scope="session" />
 
 
@@ -56,7 +56,7 @@
             <tr class="${((iter.index % 2) == 0) ? 'lightBlue' : 'white'}">
                 <td>
                     <img src="${initParam.productImagePath}${product.name}.png"
-                        alt="image of <fmt:message key='${product.name}'/>">
+                        alt="<fmt:message key='${product.name}'/>">
                 </td>
 
                 <td>
