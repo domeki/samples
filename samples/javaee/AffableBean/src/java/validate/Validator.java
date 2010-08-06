@@ -5,6 +5,7 @@
  * except in compliance with the terms of the license at:
  * http://developer.sun.com/berkeley_license.html
  */
+
 package validate;
 
 import javax.servlet.http.HttpServletRequest;

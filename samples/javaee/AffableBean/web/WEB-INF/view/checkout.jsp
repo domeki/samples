@@ -70,7 +70,7 @@
     <p><fmt:message key="checkoutText"/></p>
 
     <c:if test="${!empty orderFailureFlag}">
-        <p class="errorMessage"><fmt:message key="orderFailureError"/></p>
+        <p class="error"><fmt:message key="orderFailureError"/></p>
     </c:if>
 
     <form id="checkoutForm" action="<c:url value='purchase'/>" method="post">

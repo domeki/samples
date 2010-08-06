@@ -23,7 +23,7 @@
 
         <c:choose>
             <c:when test="${category.name == selectedCategory.name}">
-                <div class="categoryButton rounded" id="selectedCategory">
+                <div class="rounded categoryButton" id="selectedCategory">
                     <span class="categoryText">
                         <fmt:message key="${category.name}"/>
                     </span>

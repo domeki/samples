@@ -193,7 +193,7 @@ label.error {
 }
 
 /* Safari - disables underline for category boxes on index page */
-.categoryBox a:hover { text-decoration: none }
+.categoryBox a { text-decoration: none }
 
 .categoryLabel {
     position: absolute;
@@ -237,8 +237,6 @@ label.error {
     display: block;
     background-color: #d3ede8;
 }
-
-a.categoryButton:hover { text-decoration: none }
 
 #selectedCategory {
     background-color: #b2d2d2;
