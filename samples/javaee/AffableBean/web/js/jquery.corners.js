@@ -46,7 +46,7 @@ jQuery.fn.corners = function(options) {
       }
     }
   });
-  
+
   function roundWebkit(e, s) {
     var radius = '' + s.sizex + 'px ' + s.sizey + 'px';
     var $e = jQuery(e);
@@ -55,17 +55,17 @@ jQuery.fn.corners = function(options) {
     if (s.bl) $e.css('WebkitBorderBottomLeftRadius', radius);
     if (s.br) $e.css('WebkitBorderBottomRightRadius', radius);
   }
-  
+
   function roundMozilla(e, s)
-  {  
+  {
     var radius = '' + s.sizex + 'px';
     var $e = jQuery(e);
     if (s.tl) $e.css('-moz-border-radius-topleft', radius);
     if (s.tr) $e.css('-moz-border-radius-topright', radius);
     if (s.bl) $e.css('-moz-border-radius-bottomleft', radius);
-    if (s.br) $e.css('-moz-border-radius-bottomright', radius);  
+    if (s.br) $e.css('-moz-border-radius-bottomright', radius);
   }
-  
+
   function roundLink(e, s, bgColor, fgColor) {
     var table = tableElement("table");
     var tbody = tableElement("tbody");
@@ -94,11 +94,11 @@ jQuery.fn.corners = function(options) {
     /* Firefox 2 will render garbage unless we hide the overflow here */
     e.style.overflow = 'hidden';
   }
-  
+
   function ieLinkBypass() {
     if (!this.parentNode.onclick) this.parentNode.click();
   }
-  
+
   function changeInput(e) {
     var a1 = document.createElement("a");
     a1.id = e.id;
@@ -127,7 +127,7 @@ jQuery.fn.corners = function(options) {
     if (s.tl||s.tr) addCorners(e, s, bgColor, fgColor, true);
     if (s.bl||s.br) addCorners(e, s, bgColor, fgColor, false);
   }
-  
+
   function relocateContent(e, s, d) {
     var $e = jQuery(e);
     var c;
@@ -159,7 +159,7 @@ jQuery.fn.corners = function(options) {
     e.style.padding = 0;
     return d;
   }
-  
+
   function adjustedPadding(e, s, pad, top) {
     if (pad.indexOf("px") < 0) {
       try {
@@ -190,7 +190,7 @@ jQuery.fn.corners = function(options) {
     if (valign) e.style.verticalAlign = valign;
     return e;
   }
-  
+
   function backgroundColor(e) {
     try {
       var c = jQuery.css(e, "background-color");
@@ -207,7 +207,7 @@ jQuery.fn.corners = function(options) {
       return "#ffffff";
     }
   }
-  
+
   function hexShort2hex(c) {
     return '#' +
     c.substring(1,2) +
@@ -227,7 +227,7 @@ jQuery.fn.corners = function(options) {
   	for(i=1;i<4;i++) hex += ('0'+parseInt(array[i]).toString(16)).slice(-2);
   	return '#'+hex;
   }
-  
+
   function parseOptions(options, settings) {
     var options = options || '';
     var s = {sizex:5, sizey:5, tl: false, tr: false, bl: false, br: false, webkit:true, mozilla: true, transparent:false};
@@ -277,7 +277,7 @@ jQuery.fn.corners = function(options) {
     }
     return s;
   }
-  
+
   function alphaBlend(a, b, alpha) {
     var ca = Array(
       parseInt('0x' + a.substring(1, 3)),
@@ -302,7 +302,7 @@ jQuery.fn.corners = function(options) {
     if (s.transparent) addTransparentCorners(e, s, bgColor, top);
     else addAntiAliasedCorners(e, s, bgColor, fgColor, top);
   }
-  
+
   function addAntiAliasedCorners(e, s, bgColor, fgColor, top) {
     var i, j;
     var d = document.createElement("div");
@@ -348,7 +348,7 @@ jQuery.fn.corners = function(options) {
           arc2 = Math.sqrt(1.0 - Math.pow((s.sizex - n_bg - j + 1) / s.sizex, 2)) * s.sizey;
           coverage = ((arc2 + arc3) * .5) - (s.sizey - i);
         }
-        
+
         addCornerDiv(s, x, y, top, alphaBlend(bgColor, fgColor, coverage));
         y = x;
         var x = y.cloneNode(false);
@@ -362,7 +362,7 @@ jQuery.fn.corners = function(options) {
     else
       e.appendChild(d);
   }
-  
+
   function addCornerDiv(s, x, y, top, color) {
     if (top && !s.tl) x.style.marginLeft = 0;
     if (top && !s.tr) x.style.marginRight = 0;
@@ -394,7 +394,7 @@ jQuery.fn.corners = function(options) {
       if (top) x.style.borderWidth = '0 '+(s.tr?w:0)+'px 0 '+(s.tl?w:0)+'px';
       else x.style.borderWidth = '0 '+(s.br?w:0)+'px 0 '+(s.bl?w:0)+'px';
       top ? d.appendChild(x) : d.insertBefore(x, d.firstChild);
-    } 
+    }
     if (top)
       e.insertBefore(d, e.firstChild);
     else

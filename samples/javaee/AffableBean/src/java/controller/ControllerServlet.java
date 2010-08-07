@@ -242,7 +242,7 @@ public class ControllerServlet extends HttpServlet {
                 String cityRegion = request.getParameter("cityRegion");
                 String ccNumber = request.getParameter("creditcard");
 
-                // validateForm user data
+                // validate user data
                 boolean validationErrorFlag = false;
                 validationErrorFlag = validator.validateForm(name, email, phone, address, cityRegion, ccNumber, request);
 
