@@ -132,19 +132,19 @@ public class ControllerServlet extends HttpServlet {
             // get language choice
             String language = request.getParameter("language");
 
-            // place in session scope
-            session.setAttribute("language", language);
+            // place in request scope
+            request.setAttribute("language", language);
 
             String userView = (String) session.getAttribute("view");
 
             if ((userView != null) &&
-                (!userView.equals("/index")) &&         // index.jsp exists outside 'view' folder
-                (!userView.equals("/confirmation"))) {  // session is destroyed before sending confirmation
-                                                        // view, so not possible to change languages there
+                (!userView.equals("/index"))) {     // index.jsp exists outside 'view' folder
+                                                    // so must be forwarded separately
+
                 userPath = userView;
             } else {
 
-                // if previous view is index, confirmation, or cannot be determined, send user to welcome page
+                // if previous view is index or cannot be determined, send user to welcome page
                 try {
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
                 } catch (Exception ex) {
