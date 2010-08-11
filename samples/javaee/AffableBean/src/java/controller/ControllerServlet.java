@@ -13,6 +13,7 @@ import entity.Category;
 import entity.Product;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
@@ -140,7 +141,6 @@ public class ControllerServlet extends HttpServlet {
             if ((userView != null) &&
                 (!userView.equals("/index"))) {     // index.jsp exists outside 'view' folder
                                                     // so must be forwarded separately
-
                 userPath = userView;
             } else {
 
@@ -229,9 +229,6 @@ public class ControllerServlet extends HttpServlet {
         // if purchase action is called
         } else if (userPath.equals("/purchase")) {
 
-            // get language choice
-            String language = (String) session.getAttribute("language");
-
             if (cart != null) {
 
                 // extract user data from request
@@ -259,16 +256,25 @@ public class ControllerServlet extends HttpServlet {
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
 
+                        // in case language was set using toggle, get language choice before destroying session
+                        Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+                        String language = "";
+
+                        if (locale != null) {
+
+                            language = (String) locale.getLanguage();
+                        }
+
                         // dissociate shopping cart from session
                         cart = null;
 
                         // end session
                         session.invalidate();
 
-                        if (language != null) {                         // if user has manually changed language at some
-                            session = request.getSession(true);         // point during session, create new session and
-                            session.setAttribute("language", language); // set language attribute - otherwise language
-                        }                                               // may be switched on confirmation page!
+                        if (!language.isEmpty()) {                       // if user changed language using the toggle,
+                                                                         // reset the language attribute - otherwise
+                            request.setAttribute("language", language);  // language will be switched on confirmation page!
+                        }
 
                         // get order details
                         Map orderMap = orderManager.getOrderDetails(orderId);

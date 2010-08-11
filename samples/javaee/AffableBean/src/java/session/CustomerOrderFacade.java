@@ -30,12 +30,12 @@ public class CustomerOrderFacade extends AbstractFacade<CustomerOrder> {
         super(CustomerOrder.class);
     }
 
-    // manually altered - refresh() required to retrieve order id from database
+    // overridden - refresh method called to retrieve order id from database
     public CustomerOrder find(Object id) {
         CustomerOrder order = em.find(CustomerOrder.class, id);
         em.refresh(order);
         return order;
-}
+    }
 
     // manually created
     // in this implementation, there is only one order per customer
