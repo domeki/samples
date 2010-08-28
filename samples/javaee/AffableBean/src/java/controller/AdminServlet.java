@@ -110,6 +110,7 @@ public class AdminServlet extends HttpServlet {
             session = request.getSession();
             session.invalidate();
             response.sendRedirect("index.jsp");
+            return;
         }
 
         // use RequestDispatcher to forward request internally

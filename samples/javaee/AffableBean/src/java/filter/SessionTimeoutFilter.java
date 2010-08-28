@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 @WebFilter(servletNames = {"Controller"})
 public class SessionTimeoutFilter implements Filter {
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
@@ -47,8 +48,10 @@ public class SessionTimeoutFilter implements Filter {
         chain.doFilter(request, response);
     }
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
 
+    @Override
     public void destroy() {}
 
 }
