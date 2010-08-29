@@ -22,9 +22,10 @@
         </property>
     </jsp-config>
 
-    <security-role-mapping>
-        <role-name>adminUser</role-name>
+<!-- 'Default Principal To Role Mapping' enabled in GF Admin Console, so this entry is not required -->
+<!--<security-role-mapping>
+        <role-name>affableBeanAdmin</role-name>
         <group-name>affableBeanAdmin</group-name>
-    </security-role-mapping>
+    </security-role-mapping>-->
 
 </sun-web-app>

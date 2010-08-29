@@ -111,7 +111,18 @@
         <location>/WEB-INF/jspf/error/500.jspf</location>
     </error-page>
 
-    <security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/admin/login.jsp</form-login-page>
+            <form-error-page>/admin/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+<!--Annotations in the servlet (@WebServlet, @ServletSecurity and @HttpConstraint)
+    are used instead of <security-constraint> entries below-->
+<!--<security-constraint>
         <display-name>Checkout</display-name>
         <web-resource-collection>
             <web-resource-name>Checkout</web-resource-name>
@@ -131,24 +142,16 @@
             <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>adminUser</role-name>
+            <role-name>affableBeanAdmin</role-name>
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
-    </security-constraint>
+    </security-constraint>-->
 
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <realm-name>file</realm-name>
-        <form-login-config>
-            <form-login-page>/admin/login.jsp</form-login-page>
-            <form-error-page>/admin/error.jsp</form-error-page>
-        </form-login-config>
-    </login-config>
-
-    <security-role>
-        <description>administration priviledges granted for shop catalog</description>
-        <role-name>adminUser</role-name>
-    </security-role>
+<!--The <security-role> entry is not required if roles are declared using Servlet 3.0 annotations -->
+<!--<security-role>
+        <description>access to administration console</description>
+        <role-name>affableBeanAdmin</role-name>
+    </security-role>-->
 </web-app>

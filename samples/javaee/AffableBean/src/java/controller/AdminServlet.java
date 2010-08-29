@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
+import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
@@ -28,11 +31,16 @@ import session.OrderManager;
  * @author tgiunipero
  */
 @WebServlet(name = "AdminServlet",
-            urlPatterns = {"/admin/logout",
+            urlPatterns = {"/admin/",
                            "/admin/viewOrders",
                            "/admin/viewCustomers",
                            "/admin/customerRecord",
-                           "/admin/orderRecord"})
+                           "/admin/orderRecord",
+                           "/admin/logout"})
+@ServletSecurity(
+    @HttpConstraint(transportGuarantee = TransportGuarantee.CONFIDENTIAL,
+                    rolesAllowed = {"affableBeanAdmin"})
+)
 public class AdminServlet extends HttpServlet {
 
     @EJB
@@ -77,7 +85,7 @@ public class AdminServlet extends HttpServlet {
         // if customerRecord is requested
         if (userPath.equals("/admin/customerRecord")) {
 
-            // get customer id from request
+            // get customer ID from request
             String customerId = request.getQueryString();
 
             // get customer details
@@ -92,7 +100,7 @@ public class AdminServlet extends HttpServlet {
         // if orderRecord is requested
         if (userPath.equals("/admin/orderRecord")) {
 
-            // get customer id from request
+            // get customer ID from request
             String orderId = request.getQueryString();
 
             // get order details

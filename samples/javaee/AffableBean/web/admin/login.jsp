@@ -12,7 +12,7 @@
 <form action="<c:url value='j_security_check'/>" method=post>
     <div id="loginBox" class="rounded">
         <p><strong>username:</strong>
-            <input type="text"  size="20" name="j_username"></p>
+            <input type="text" size="20" name="j_username"></p>
 
         <p><strong>password:</strong>
             <input type="password" size="20" name="j_password"></p>
