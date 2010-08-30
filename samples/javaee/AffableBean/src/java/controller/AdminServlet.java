@@ -116,8 +116,8 @@ public class AdminServlet extends HttpServlet {
         // if logout is requested
         if (userPath.equals("/admin/logout")) {
             session = request.getSession();
-            session.invalidate();
-            response.sendRedirect("index.jsp");
+            session.invalidate();           // terminate session
+            response.sendRedirect("");      // creates new request for '/admin/'
             return;
         }
 
