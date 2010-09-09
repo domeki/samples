@@ -15,7 +15,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-<!--Annotations in the servlet are used instead of <servlet> and <servlet-mapping> entries below-->
+<!--The @WebServlet annotation is used in the ControllerServlet instead of
+    the <servlet> and <servlet-mapping> entries below-->
 <!--<servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>controller.ControllerServlet</servlet-class>
@@ -120,9 +121,7 @@
         </form-login-config>
     </login-config>
 
-<!--Annotations in the servlet (@WebServlet, @ServletSecurity and @HttpConstraint)
-    are used instead of <security-constraint> entries below-->
-<!--<security-constraint>
+    <security-constraint>
         <display-name>Checkout</display-name>
         <web-resource-collection>
             <web-resource-name>Checkout</web-resource-name>
@@ -135,7 +134,9 @@
         </user-data-constraint>
     </security-constraint>
 
-    <security-constraint>
+<!--Annotations in the AdminServlet (@ServletSecurity and @HttpConstraint) are
+    used instead of the <security-constraint> entry below-->
+<!--<security-constraint>
         <display-name>Admin</display-name>
         <web-resource-collection>
             <web-resource-name>Affable Bean Administration</web-resource-name>
@@ -149,7 +150,7 @@
         </user-data-constraint>
     </security-constraint>-->
 
-<!--The <security-role> entry is not required if roles are declared using Servlet 3.0 annotations -->
+<!--The <security-role> entry is not required if role is declared using @HttpConstraint annotation-->
 <!--<security-role>
         <description>access to administration console</description>
         <role-name>affableBeanAdmin</role-name>
