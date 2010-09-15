@@ -12,7 +12,7 @@ import cart.ShoppingCart;
 import entity.Category;
 import entity.Product;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import javax.ejb.EJB;
@@ -77,7 +77,7 @@ public class ControllerServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         Category selectedCategory;
-        List<Product> categoryProducts;
+        Collection<Product> categoryProducts;
 
 
         // if category page is requested
@@ -95,7 +95,7 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("selectedCategory", selectedCategory);
 
                 // get all products for selected category
-                categoryProducts = productFacade.findForCategory(selectedCategory);
+                categoryProducts = selectedCategory.getProductCollection();
 
                 // place category products in session scope
                 session.setAttribute("categoryProducts", categoryProducts);
