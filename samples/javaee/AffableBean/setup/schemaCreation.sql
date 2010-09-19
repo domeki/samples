@@ -116,7 +116,8 @@ CREATE  TABLE IF NOT EXISTS `affablebean`.`ordered_product` (
     REFERENCES `affablebean`.`product` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+COMMENT = 'matches products with customer orders and records their quantity';
 
 
 

@@ -18,9 +18,6 @@
 --
 INSERT INTO `category` (name) VALUES ('dairy'),('meats'),('bakery'),('fruit & veg');
 
--- (using resource bundle)
---INSERT INTO `category` (name) VALUES ('dairy'),('meats'),('bakery'),('fruitVeg');
-
 
 --
 -- Sample data for table `product`
@@ -49,22 +46,22 @@ INSERT INTO `product` (`name`, price, description, category_id) VALUES ('seedles
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('milk', 1.70, 1);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('cheese', 2.39, 1);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('butter', 1.09, 1);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('eggs', 1.76, 1);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('free range eggs', 1.76, 1);
 --
---INSERT INTO `product` (`name`, price, category_id) VALUES ('meatPatties', 2.29, 2);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('parmaHam', 3.49, 2);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('chicken', 2.59, 2);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('organic meat patties', 2.29, 2);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('parma ham', 3.49, 2);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('chicken leg', 2.59, 2);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('sausages', 3.55, 2);
 --
---INSERT INTO `product` (`name`, price, category_id) VALUES ('loaf', 1.89, 3);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('bagel', 1.19, 3);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('bun', 1.15, 3);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('cookie', 2.39, 3);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('sunflower seed loaf', 1.89, 3);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('sesame seed bagel', 1.19, 3);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('pumpkin seed bunbun', 1.15, 3);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('chocolate cookies', 2.39, 3);
 --
---INSERT INTO `product` (`name`, price, category_id) VALUES ('corn', 1.59, 4);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('berries', 2.49, 4);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('corn on the cob', 1.59, 4);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('red currants', 2.49, 4);
 --INSERT INTO `product` (`name`, price, category_id) VALUES ('broccoli', 1.29, 4);
---INSERT INTO `product` (`name`, price, category_id) VALUES ('watermelon', 1.49, 4);
+--INSERT INTO `product` (`name`, price, category_id) VALUES ('seedless watermelon', 1.49, 4);
 
 
 --
