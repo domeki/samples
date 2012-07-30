@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entities;
 
 import java.io.Serializable;
@@ -21,7 +20,7 @@ public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
     private String message;
 
     public String getMessage() {
@@ -62,7 +61,7 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Message[id=" + id + "]";
+        return "entities.Message[ id=" + id + " ]";
     }
-
+    
 }
